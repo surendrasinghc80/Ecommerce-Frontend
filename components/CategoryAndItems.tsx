@@ -55,7 +55,7 @@ function CategoryAndItems() {
     },
     {
       id: "5",
-      name: "Red Summer Dress",
+      name: "Silver High Neck Sweater",
       price: 95.0,
       rating: 5,
       reviewCount: 89,
@@ -63,7 +63,7 @@ function CategoryAndItems() {
     },
     {
       id: "6",
-      name: "Blue Formal Shirt",
+      name: "Yellow Casual Sweater",
       price: 75.0,
       rating: 4,
       reviewCount: 162,
@@ -71,7 +71,7 @@ function CategoryAndItems() {
     },
     {
       id: "7",
-      name: "Leather Jacket",
+      name: "Denim Blue Jeans",
       price: 250.0,
       rating: 5,
       reviewCount: 203,
@@ -79,7 +79,7 @@ function CategoryAndItems() {
     },
     {
       id: "8",
-      name: "White Sneakers",
+      name: "Black White Sweater",
       price: 120.0,
       rating: 4,
       reviewCount: 178,

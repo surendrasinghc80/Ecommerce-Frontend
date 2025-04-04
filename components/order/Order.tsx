@@ -15,7 +15,7 @@ function Order() {
   return (
     <div className=" flex flex-row w-2/3 mx-auto my-8  relative bg-gray-100 ">
       <div className="basis-[20%] text-zinc-600">
-        <div className="bg-white p-5 rounded-md mr-5">
+        <div className="bg-white p-5 rounded-md shadow-md mr-5">
           <div className="mb-10">
             <div className="mb-3">
               <p className="text-xs text-thin">DASHBOARD</p>
@@ -84,7 +84,7 @@ function Order() {
               Pending
             </Badge>
           </div>
-          <div className="basis-[25%] justify-start ml-6 ">
+          <div className="basis-[25%] justify-start text-sm ml-6 ">
             <p>NOV 10, 2022</p>
           </div>
           <div className="basis-[25%] justify-start ml-6">
@@ -101,7 +101,7 @@ function Order() {
               Delivered
             </Badge>
           </div>
-          <div className="basis-[25%] justify-start ml-6 ">
+          <div className="basis-[25%] justify-start text-sm ml-6 ">
             <p>DEC 15, 2022</p>
           </div>
           <div className="basis-[25%] justify-start ml-6">
@@ -118,7 +118,7 @@ function Order() {
               Delivered
             </Badge>
           </div>
-          <div className="basis-[25%] justify-start ml-6 ">
+          <div className="basis-[25%] justify-start text-sm ml-6 ">
             <p>JAN 10, 2023</p>
           </div>
           <div className="basis-[25%] justify-start ml-6">
@@ -135,7 +135,7 @@ function Order() {
               Delivered
             </Badge>
           </div>
-          <div className="basis-[25%] justify-start ml-6 ">
+          <div className="basis-[25%] justify-start text-sm ml-6 ">
             <p>AUG 10, 2023</p>
           </div>
           <div className="basis-[25%] justify-start ml-6">
@@ -152,7 +152,7 @@ function Order() {
               Cancelled
             </Badge>
           </div>
-          <div className="basis-[25%] justify-start ml-6 ">
+          <div className="basis-[25%] justify-start text-sm ml-6 ">
             <p>JUN 10, 2024</p>
           </div>
           <div className="basis-[25%] justify-start ml-6">

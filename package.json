@@ -25,7 +25,8 @@
     "react-responsive-carousel": "^3.2.23",
     "swiper": "^11.2.6",
     "tailwind-merge": "^3.0.2",
-    "tw-animate-css": "^1.2.4"
+    "tw-animate-css": "^1.2.4",
+    "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

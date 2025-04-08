@@ -1,0 +1,35 @@
+import { NEXT_AUTH } from "../../../lib/auth";
+import NextAuth from "next-auth";
+
+const handler = NextAuth(NEXT_AUTH);
+
+export const GET = handler;
+export const POST = handler;
+export const PUT = handler;
+export const DELETE = handler;
+export const PATCH = handler;
+export const OPTIONS = handler;
+// export const HEAD = handler;
+// export const ALL = handler;
+// export const ANY = handler;
+// export const TRACE = handler;
+// export const CONNECT = handler;
+// export const COPY = handler;
+// export const LINK = handler;
+// export const UNLINK = handler;
+// export const PURGE = handler;
+// export const LOCK = handler;
+// export const UNLOCK = handler;
+// export const PROPFIND = handler;
+// export const VIEW = handler;
+// export const MKCOL = handler;
+// export const MOVE = handler;
+// export const PROPPATCH = handler;
+// export const REPORT = handler;
+// export const MKACTIVITY = handler;
+// export const CHECKOUT = handler;
+// export const MERGE = handler;
+// export const SEARCH = handler;
+// export const NOTIFY = handler;
+// export const SUBSCRIBE = handler;
+// export const UNSUBSCRIBE = handler;

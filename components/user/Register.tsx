@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -5,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function Register() {
+  const { data: session, status } = useSession();
   return (
     <div className="bg-gray-100 flex justify-center flex-col items-center min-h-screen">
       <div className="bg-white w-lg text-center p-6 rounded-t-sm shadow-md  ">
@@ -63,7 +66,7 @@ function Register() {
           Create Account
         </Button>
         <DropdownMenuSeparator className="mt-5 mb-5" />
-        <Button className="w-full bg-blue-900 cursor-pointer mb-5 ">
+        <Button className="w-full bg-blue-900 hover:bg-blue-700 cursor-pointer mb-5 ">
           <Image
             src={"/images/facebook-logo.png"}
             alt="Google logo"
@@ -73,16 +76,28 @@ function Register() {
           />
           Continue with Facebook
         </Button>
-        <Button className="w-full bg-blue-500 cursor-pointer ">
-          <Image
-            src={"/images/google-logo.png"}
-            alt="Google logo"
-            height={20}
-            width={20}
-            className="object-contain"
-          />
-          Continue with Google
-        </Button>
+        {status === "authenticated" ? (
+          <Button
+            onClick={() => signOut()}
+            className="w-full bg-red-400 cursor-pointer hover:bg-red-500 "
+          >
+            Sign Out
+          </Button>
+        ) : (
+          <Button
+            onClick={() => signIn("google", { callbackUrl: "/" })}
+            className="w-full bg-blue-500 cursor-pointer hover:bg-blue-600 "
+          >
+            <Image
+              src={"/images/google-logo.png"}
+              alt="Google logo"
+              height={20}
+              width={20}
+              className="object-contain"
+            />
+            Continue with Google
+          </Button>
+        )}
       </div>
       <div className="bg-gray-200 w-lg text-center justify-center item-center p-4 rounded-b-sm shadow-md flex flex-row ">
         <h1 className="text-zinc-600 text-sm">Already have account?</h1>

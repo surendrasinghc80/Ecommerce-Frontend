@@ -50,10 +50,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import { Eye } from "lucide-react";
 import Image from "next/image";
+import { signOut, signIn, useSession } from "next-auth/react";
 
 export default function Header() {
+  const { data: session, status } = useSession();
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
   return (
     <header className="flex w-full justify-center bg-white shadow-lg">
@@ -111,13 +114,25 @@ export default function Header() {
               </div>
             </div>
           </div>
-
           {/* User Icons */}
           <div className="flex items-center space-x-4">
+            {status === "authenticated" ? (
+              <p className="font-normal text-md">
+                Welcome {session?.user?.name}
+              </p>
+            ) : (
+              <p className="font-normal text-md">Welcome Guest</p>
+            )}
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <User className="h-10 w-10" />
+                  <Avatar>
+                    <AvatarImage
+                      src={session?.user?.image || "/images/user.png"}
+                      alt={session?.user?.name || "User"}
+                    />
+                    <AvatarFallback>WG</AvatarFallback>
+                  </Avatar>
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
@@ -166,29 +181,44 @@ export default function Header() {
                     />
                     Continue with Facebook
                   </Button>
-                  <Button className="w-full bg-blue-500 cursor-pointer ">
-                    <Image
-                      src={"/images/google-logo.png"}
-                      alt="Google logo"
-                      height={20}
-                      width={20}
-                      className="object-contain"
-                    />
-                    Continue with Google
-                  </Button>
+
+                  {status === "authenticated" ? (
+                    <Button
+                      onClick={() => signOut()}
+                      className="w-full bg-red-400 cursor-pointer hover:bg-red-500 "
+                    >
+                      Sign Out
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => signIn("google")}
+                      className="w-full bg-blue-500 cursor-pointer hover:bg-blue-600 "
+                    >
+                      <Image
+                        src={"/images/google-logo.png"}
+                        alt="Google logo"
+                        height={20}
+                        width={20}
+                        className="object-contain"
+                      />
+                      Continue with Google
+                    </Button>
+                  )}
                 </div>
                 <DialogFooter>
                   <div className="flex flex-col w-full justify-center items-center">
-                    <div className="flex flex-row justify-center  p-5 items-center w-full text-center">
-                      <h1 className="text-zinc-600 text-sm">
-                        Don&apos;t have an account?
-                      </h1>
-                      <Link href="/user">
-                        <p className="text-black ml-1 text-sm underline underline-offset-4 cursor-pointer">
-                          Sign Up
-                        </p>
-                      </Link>
-                    </div>
+                    {status === "authenticated" ? null : (
+                      <div className="flex flex-row justify-center  p-5 items-center w-full text-center">
+                        <h1 className="text-zinc-600 text-sm">
+                          Don&apos;t have an account?
+                        </h1>
+                        <Link href="/user">
+                          <p className="text-black ml-1 text-sm underline underline-offset-4 cursor-pointer">
+                            Sign Up
+                          </p>
+                        </Link>
+                      </div>
+                    )}
                     <div className="flex flex-row justify-center p-5 items-center w-full text-center">
                       <h1 className="text-zinc-600 text-sm">
                         Forgot your password?

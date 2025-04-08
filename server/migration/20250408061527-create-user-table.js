@@ -9,21 +9,21 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      firstName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      preferred_name: {
+      lastName: {
         type: Sequelize.STRING,
       },
-      created_at: {
+      createdAt: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
-      updated_at: {
+      updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });

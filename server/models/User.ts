@@ -1,5 +1,13 @@
 import { Sequelize, DataTypes } from "sequelize";
-import sequelize from "../../app/dbConnection.js";
+import sequelize from "../../app/dbConnection";
+
+export interface IUser {
+  id: number;
+  firstName: string;
+  lastName: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const User = sequelize.define(
   "User",
@@ -17,10 +25,18 @@ const User = sequelize.define(
       type: DataTypes.STRING(),
       // allowNull defaults to true
     },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     tableName: "users",
-    timestamps: false,
+    timestamps: true,
     // Other model options go here
   }
 );

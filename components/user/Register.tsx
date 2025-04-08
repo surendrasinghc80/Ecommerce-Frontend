@@ -29,7 +29,7 @@ function Register() {
           <Input
             id="email"
             placeholder="example@gmail.com"
-            className="col-span-3 p-4 mb-4 "
+            className="col-span-3 p-4 mb-4"
           />
         </div>
         <div>

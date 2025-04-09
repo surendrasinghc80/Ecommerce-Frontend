@@ -10,6 +10,8 @@ import { DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 
 const registerSchema = z
   .object({
@@ -27,6 +29,7 @@ type RegisterForm = z.infer<typeof registerSchema>;
 
 function Register() {
   const { data: session, status } = useSession();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -110,12 +113,22 @@ function Register() {
           <Label htmlFor="password" className="text-right pb-2 mt-3">
             Password
           </Label>
-          <Input
-            type="password"
-            {...register("password")}
-            id="password"
-            className="p-4 mb-1"
-          />
+          <div className="relative">
+            <Input
+              type={showPassword ? "text" : "password"}
+              {...register("password")}
+              id="password"
+              placeholder="********"
+              className="p-4 mb-1 pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
           {errors.password && (
             <p className="text-red-500 text-left m-4 ml-0 mt-0 text-sm">
               {errors.password.message}
@@ -125,14 +138,24 @@ function Register() {
 
         <div>
           <Label htmlFor="confirmPassword" className="text-right pb-2 mt-3">
-            Confirm Password
+            Password
           </Label>
-          <Input
-            type="password"
-            {...register("confirmPassword")}
-            id="confirmPassword"
-            className="p-4 mb-1"
-          />
+          <div className="relative">
+            <Input
+              type={showPassword ? "text" : "password"}
+              {...register("confirmPassword")}
+              id="confirmPassword"
+              placeholder="********"
+              className="p-4 mb-1 pr-10"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
           {errors.confirmPassword && (
             <p className="text-red-500 text-left m-4 ml-0 mt-0 text-sm">
               {errors.confirmPassword.message}

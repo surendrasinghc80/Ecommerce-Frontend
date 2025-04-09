@@ -221,12 +221,14 @@ export default function Header() {
                       >
                         Password
                       </Label>
+
                       <Input
                         {...register("password")}
                         id="password"
                         placeholder="*********"
                         className="col-span-3 p-4 mb-1"
                       />
+
                       {errors.password && (
                         <p className="text-red-500 text-left m-4 ml-0 mt-0 text-sm">
                           {errors.password.message}

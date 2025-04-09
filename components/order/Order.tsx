@@ -7,7 +7,6 @@ import {
   MapPinHouse,
   CreditCard,
   ArrowRight,
-  ShoppingBasket,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -25,7 +24,7 @@ function Order() {
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">
                 <Link href="/dashboard" className="flex flex-row">
                   <User className="h-5 w-5 mr-2" />
-                  <p>Dashboard</p>
+                  <p>Orders</p>
                 </Link>
               </div>
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">

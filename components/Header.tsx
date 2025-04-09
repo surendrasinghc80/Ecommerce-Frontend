@@ -161,7 +161,11 @@ export default function Header() {
           </div>
           {/* User Icons */}
           <div className="flex items-center space-x-4">
-            {status === "authenticated" ? (
+            {status === "loading" ? (
+              <p className="font-normal text-md text-gray-500 animate-pulse">
+                Loading...
+              </p>
+            ) : status === "authenticated" ? (
               <p className="font-normal text-md">
                 Welcome {session?.user?.name}
               </p>
@@ -255,7 +259,7 @@ export default function Header() {
                         onClick={() => signOut()}
                         className="w-full bg-red-400 cursor-pointer hover:bg-red-500 "
                       >
-                        Sign Out
+                        Sign Out {session?.user?.name}!
                       </Button>
                     ) : (
                       <Button

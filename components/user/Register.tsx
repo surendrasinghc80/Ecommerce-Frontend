@@ -173,7 +173,7 @@ function Register() {
             onClick={() => signOut()}
             className="w-full bg-red-400 hover:bg-red-500"
           >
-            Sign Out
+            Sign Out {session?.user?.name}!
           </Button>
         ) : (
           <Button

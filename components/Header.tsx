@@ -1,7 +1,6 @@
 "use client";
 import {
   ChevronDown,
-  User,
   ShoppingCart,
   Grid,
   Search,

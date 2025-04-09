@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "server/models/index.js",
     "server/models/user.js",
-    "server/server.js"
+    "server/server.js",
+    "app/lib/auth.js"
   ],
   "exclude": ["node_modules"]
 }

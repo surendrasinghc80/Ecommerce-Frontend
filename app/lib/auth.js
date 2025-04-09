@@ -30,7 +30,6 @@ export const NEXT_AUTH = {
               }),
             }
           );
-
           if (!response.ok) {
             // If login fails, try to sign up the user
             response = await fetch(

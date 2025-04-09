@@ -1,29 +1,40 @@
-import { Sequelize, DataTypes } from "sequelize";
-import sequelize from "../../app/dbConnection";
+import {
+  DataTypes,
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+} from "sequelize";
+import sequelize from "@/app/dbConnection";
 
-export interface IUser {
-  id: number;
-  firstName: string;
-  lastName: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+  declare id: CreationOptional<number>;
+  declare fullName: string;
+  declare email: string;
+  declare password: string;
+  declare createdAt: CreationOptional<Date>;
+  declare updatedAt: CreationOptional<Date>;
 }
 
-const User = sequelize.define(
-  "User",
+User.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       primaryKey: true,
       autoIncrement: true,
     },
-    firstName: {
-      type: DataTypes.STRING(),
+    fullName: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    lastName: {
-      type: DataTypes.STRING(),
-      // allowNull defaults to true
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -35,9 +46,10 @@ const User = sequelize.define(
     },
   },
   {
+    sequelize,
+    modelName: "User",
     tableName: "users",
     timestamps: true,
-    // Other model options go here
   }
 );
 

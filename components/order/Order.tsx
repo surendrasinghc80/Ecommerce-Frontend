@@ -10,6 +10,7 @@ import {
   ShoppingBasket,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 function Order() {
   return (
@@ -22,16 +23,22 @@ function Order() {
             </div>
             <div>
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">
-                <ShoppingBasket className="h-5 w-5 mr-2" />
-                <p>Orders</p>
+                <Link href="/dashboard" className="flex flex-row">
+                  <User className="h-5 w-5 mr-2" />
+                  <p>Dashboard</p>
+                </Link>
               </div>
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">
-                <Heart className="h-5 w-5 mr-2" />
-                <p>Whishlist</p>
+                <Link href="/wishlist" className="flex flex-row">
+                  <Heart className="h-5 w-5 mr-2" />
+                  <p>Whishlist</p>
+                </Link>
               </div>
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">
-                <Headset className="h-5 w-5 mr-2" />
-                <p>Support Tickets</p>
+                <Link href="/support" className="flex flex-row">
+                  <Headset className="h-5 w-5 mr-2" />
+                  <p>Support</p>
+                </Link>
               </div>
             </div>
           </div>
@@ -41,16 +48,22 @@ function Order() {
             </div>
             <div>
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">
-                <User className="h-5 w-5 mr-2" />
-                <p>Profile Info</p>
+                <Link href="/profile" className="flex flex-row">
+                  <User className="h-5 w-5 mr-2" />
+                  <p>Profile Info</p>
+                </Link>
               </div>
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">
-                <MapPinHouse className="h-5 w-5 mr-2" />
-                <p>Addresses</p>
+                <Link href="/address" className="flex flex-row">
+                  <MapPinHouse className="h-5 w-5 mr-2" />
+                  <p>Addresses</p>
+                </Link>
               </div>
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">
-                <CreditCard className="h-5 w-5 mr-2" />
-                <p>Payment Methods</p>
+                <Link href="/payment" className="flex flex-row">
+                  <CreditCard className="h-5 w-5 mr-2" />
+                  <p>Payment Methods</p>
+                </Link>
               </div>
             </div>
           </div>

@@ -16,7 +16,7 @@ const registerSchema = z
     fullName: z.string().min(1, "Full name is required"),
     email: z.string().email("Invalid email"),
     password: z.string().min(6, "Password must be at least 6 characters"),
-    confirmPassword: z.string(),
+    confirmPassword: z.string().min(6, "Confirm password is required"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -80,61 +80,61 @@ function Register() {
             {...register("fullName")}
             id="name"
             placeholder="Surendra Singh"
-            className="p-4 mb-2"
+            className="p-4 mb-1"
           />
           {errors.fullName && (
-            <p className="text-red-500 text-left text-sm">
+            <p className="text-red-500 text-left m-4 ml-0 mt-0 text-sm">
               {errors.fullName.message}
             </p>
           )}
         </div>
 
         <div>
-          <Label htmlFor="email" className="text-right pb-2">
+          <Label htmlFor="email" className="text-right pb-2 mt-3">
             Email
           </Label>
           <Input
             {...register("email")}
             id="email"
             placeholder="example@gmail.com"
-            className="p-4 mb-2"
+            className="p-4 mb-1"
           />
           {errors.email && (
-            <p className="text-red-500 text-left text-sm">
+            <p className="text-red-500 text-left m-4 ml-0 mt-0 text-sm">
               {errors.email.message}
             </p>
           )}
         </div>
 
         <div>
-          <Label htmlFor="password" className="text-right pb-2">
+          <Label htmlFor="password" className="text-right pb-2 mt-3">
             Password
           </Label>
           <Input
             type="password"
             {...register("password")}
             id="password"
-            className="p-4 mb-2"
+            className="p-4 mb-1"
           />
           {errors.password && (
-            <p className="text-red-500 text-left text-sm">
+            <p className="text-red-500 text-left m-4 ml-0 mt-0 text-sm">
               {errors.password.message}
             </p>
           )}
         </div>
 
         <div>
-          <Label htmlFor="confirmPassword" className="text-right pb-2">
+          <Label htmlFor="confirmPassword" className="text-right pb-2 mt-3">
             Confirm Password
           </Label>
           <Input
             type="password"
             {...register("confirmPassword")}
             id="confirmPassword"
-            className="p-4 mb-2"
+            className="p-4 mb-1"
           />
           {errors.confirmPassword && (
-            <p className="text-red-500 text-left text-sm">
+            <p className="text-red-500 text-left m-4 ml-0 mt-0 text-sm">
               {errors.confirmPassword.message}
             </p>
           )}

@@ -202,26 +202,29 @@ export default function Header() {
                         {...register("email")}
                         id="email"
                         placeholder="example@mail.com"
-                        className="col-span-3 p-4 mb-4 "
+                        className="col-span-3 p-4 mb-1"
                       />
                       {errors.email && (
-                        <p className="text-red-500 text-left text-sm">
+                        <p className="text-red-500 text-left m-1 ml-0 mt-0 text-sm">
                           {errors.email.message}
                         </p>
                       )}
                     </div>
                     <div className="flex flex-col">
-                      <Label htmlFor="password" className="text-right pb-2">
+                      <Label
+                        htmlFor="password"
+                        className="text-right pb-2 mt-3"
+                      >
                         Password
                       </Label>
                       <Input
                         {...register("password")}
                         id="password"
                         placeholder="*********"
-                        className="col-span-3 p-4 mb-4"
+                        className="col-span-3 p-4 mb-1"
                       />
                       {errors.password && (
-                        <p className="text-red-500 text-left text-sm">
+                        <p className="text-red-500 text-left m-4 ml-0 mt-0 text-sm">
                           {errors.password.message}
                         </p>
                       )}
@@ -230,7 +233,7 @@ export default function Header() {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-red-400 cursor-pointer "
+                        className="w-full bg-red-400 mt-4 cursor-pointer "
                       >
                         {isSubmitting ? "Logging..." : "Login"}
                       </Button>

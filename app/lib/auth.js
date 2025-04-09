@@ -1,69 +1,35 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcrypt";
+import User from "@/server/models/User";
 
 export const NEXT_AUTH = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {
-          label: "Username",
-          type: "text",
-          placeholder: "example@gmail.com",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "********",
-        },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
-        try {
-          let response = await fetch(
-            "https://demo-ynml.onrender.com/api/user/signin",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                email: credentials?.email,
-                password: credentials?.password,
-              }),
-            }
-          );
-          if (!response.ok) {
-            // If login fails, try to sign up the user
-            response = await fetch(
-              "https://demo-ynml.onrender.com/api/user/signup",
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  email: credentials?.email,
-                  password: credentials?.password,
-                }),
-              }
-            );
+        const user = await User.findOne({
+          where: { email: credentials.email },
+        });
 
-            if (!response.ok) {
-              throw new Error("Signup failed");
-            }
-          }
+        if (!user) throw new Error("No user found");
 
-          const user = await response.json();
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
-          if (!user?.token) {
-            throw new Error("Invalid response from server");
-          }
+        if (!isValid) throw new Error("Invalid password");
 
-          return {
-            id: user.userId,
-            email: user.email,
-            backendToken: user.token,
-          };
-        } catch (error) {
-          console.error("Auth error:", error.message);
-          throw new Error(error.message || "Authentication failed");
-        }
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.fullName,
+        };
       },
     }),
     GoogleProvider({

@@ -53,10 +53,56 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import { Eye } from "lucide-react";
 import Image from "next/image";
 import { signOut, signIn, useSession } from "next-auth/react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const registerSchema = z.object({
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+type RegisterForm = z.infer<typeof registerSchema>;
 
 export default function Header() {
   const { data: session, status } = useSession();
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterForm>({
+    resolver: zodResolver(registerSchema),
+  });
+
+  const onSubmit = async (data: RegisterForm) => {
+    try {
+      const response = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        alert(result.error || "Signup failed");
+        return;
+      }
+
+      alert("Login successfully!");
+      signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        callbackUrl: "/",
+      });
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Something went wrong");
+    }
+  };
+
   return (
     <header className="flex w-full justify-center bg-white shadow-lg">
       <div className="w-full max-w-screen-xl px-6 pl-0 pr-0 ">
@@ -143,67 +189,88 @@ export default function Header() {
                     Log in with email & password
                   </DialogDescription>
                 </DialogHeader>
-                <div className="flex flex-col">
-                  <div className="flex flex-col ">
-                    <Label htmlFor="email" className="text-right pb-2">
-                      Email or Phone Number
-                    </Label>
-                    <Input
-                      id="email"
-                      placeholder="example@mail.com"
-                      className="col-span-3 p-4 mb-4 "
-                    />
-                  </div>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="bg-white w-sm text-center p-6 rounded-t-sm"
+                >
                   <div className="flex flex-col">
-                    <Label htmlFor="password" className="text-right pb-2">
-                      Password
-                    </Label>
-                    <Input
-                      id="password"
-                      placeholder="*********"
-                      className="col-span-3 p-4 mb-4"
-                    />
-                  </div>
-                  <div>
-                    <Button className="w-full bg-red-400 cursor-pointer ">
-                      Login
-                    </Button>
-                  </div>
-                  <DropdownMenuSeparator className="mt-5 mb-5" />
-                  <Button className="w-full bg-blue-900 cursor-pointer mb-5 ">
-                    <Image
-                      src={"/images/facebook-logo.png"}
-                      alt="Google logo"
-                      height={20}
-                      width={20}
-                      className="object-contain"
-                    />
-                    Continue with Facebook
-                  </Button>
-
-                  {status === "authenticated" ? (
-                    <Button
-                      onClick={() => signOut()}
-                      className="w-full bg-red-400 cursor-pointer hover:bg-red-500 "
-                    >
-                      Sign Out
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={() => signIn("google")}
-                      className="w-full bg-blue-500 cursor-pointer hover:bg-blue-600 "
-                    >
+                    <div className="flex flex-col ">
+                      <Label htmlFor="email" className="text-right pb-2">
+                        Email or Phone Number
+                      </Label>
+                      <Input
+                        {...register("email")}
+                        id="email"
+                        placeholder="example@mail.com"
+                        className="col-span-3 p-4 mb-4 "
+                      />
+                      {errors.email && (
+                        <p className="text-red-500 text-left text-sm">
+                          {errors.email.message}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex flex-col">
+                      <Label htmlFor="password" className="text-right pb-2">
+                        Password
+                      </Label>
+                      <Input
+                        {...register("password")}
+                        id="password"
+                        placeholder="*********"
+                        className="col-span-3 p-4 mb-4"
+                      />
+                      {errors.password && (
+                        <p className="text-red-500 text-left text-sm">
+                          {errors.password.message}
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-red-400 cursor-pointer "
+                      >
+                        {isSubmitting ? "Logging..." : "Login"}
+                      </Button>
+                    </div>
+                    <DropdownMenuSeparator className="mt-5 mb-5" />
+                    <Button className="w-full bg-blue-900 cursor-pointer mb-5 ">
                       <Image
-                        src={"/images/google-logo.png"}
+                        src={"/images/facebook-logo.png"}
                         alt="Google logo"
                         height={20}
                         width={20}
                         className="object-contain"
                       />
-                      Continue with Google
+                      Continue with Facebook
                     </Button>
-                  )}
-                </div>
+
+                    {status === "authenticated" ? (
+                      <Button
+                        onClick={() => signOut()}
+                        className="w-full bg-red-400 cursor-pointer hover:bg-red-500 "
+                      >
+                        Sign Out
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => signIn("google")}
+                        className="w-full bg-blue-500 cursor-pointer hover:bg-blue-600 "
+                      >
+                        <Image
+                          src={"/images/google-logo.png"}
+                          alt="Google logo"
+                          height={20}
+                          width={20}
+                          className="object-contain"
+                        />
+                        Continue with Google
+                      </Button>
+                    )}
+                  </div>
+                </form>
                 <DialogFooter>
                   <div className="flex flex-col w-full justify-center items-center">
                     {status === "authenticated" ? null : (

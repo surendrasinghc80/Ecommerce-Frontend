@@ -11,32 +11,16 @@ interface CartSidebarProps {
   onClose: () => void;
 }
 
+interface item {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  imageSrc: string;
+}
+
 export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { cart, removeFromCart, total } = useCart();
-
-  // Calculate total price
-  // const totalPrice = items.reduce(
-  //   (sum, item) => sum + item.price * item.quantity,
-  //   0
-  // );
-
-  // Handle quantity changes
-  // const updateQuantity = (id: string, newQuantity: number) => {
-  //   if (newQuantity < 1) return;
-
-  //   setItems(
-  //     items.map((item) =>
-  //       item.id === id ? { ...item, quantity: newQuantity } : item
-  //     )
-  //   );
-  // };
-
-  // Remove item from cart
-  // const removeItem = (id: string) => {
-  //   setItems(items.filter((item) => item.id !== id));
-  // };
-
-  // Prevent body scrolling when cart is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -81,44 +65,49 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto py-2">
-            <div className="p-4 border-b">
-              <div className="flex gap-4">
-                {/* Product Image */}
-                <div className="relative h-20 w-20 flex-shrink-0">
-                  <Image
-                    src="/placeholder.svg"
-                    alt="Product Image"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                {/* Product Details */}
-                <div className="flex-1">
-                  <div className="flex justify-between">
-                    <h3 className="font-medium text-sm">Product Name</h3>
-                    <button className="text-gray-400 hover:text-gray-600">
-                      <X className="h-4 w-4" />
-                    </button>
+            {cart.map((item: any) => (
+              <div key={item.id} className="p-4 border-b">
+                <div className="flex gap-4">
+                  {/* Product Image */}
+                  <div className="relative h-20 w-20 flex-shrink-0">
+                    <Image
+                      src={item.imageSrc || "/placeholder.svg"}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">size</p>
-                  <div className="flex justify-between items-center mt-2">
-                    <p className="font-medium text-rose-500">$200</p>
 
-                    {/* Quantity Controls */}
-                    <div className="flex items-center gap-2">
-                      <button className="p-1 border rounded-md hover:bg-gray-100">
-                        <Minus className="h-3 w-3" />
+                  {/* Product Details */}
+                  <div className="flex-1">
+                    <div className="flex justify-between">
+                      <h3 className="font-medium text-sm">{item.name}</h3>
+                      <button
+                        onClick={() => removeFromCart(item._id)}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        <X className="h-4 w-4" />
                       </button>
-                      <span className="w-6 text-center">2</span>
-                      <button className="p-1 border rounded-md hover:bg-gray-100">
-                        <Plus className="h-3 w-3" />
-                      </button>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">size</p>
+                    <div className="flex justify-between items-center mt-2">
+                      <p className="font-medium text-rose-500">${item.price}</p>
+
+                      {/* Quantity Controls */}
+                      <div className="flex items-center gap-2">
+                        <button className="p-1 border rounded-md hover:bg-gray-100">
+                          <Minus className="h-3 w-3" />
+                        </button>
+                        <span className="w-6 text-center">{item.quantity}</span>
+                        <button className="p-1 border rounded-md hover:bg-gray-100">
+                          <Plus className="h-3 w-3" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
 
           {/* Footer */}
@@ -127,7 +116,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               className="w-full bg-rose-500 hover:bg-rose-600 text-white"
               size="lg"
             >
-              Checkout Now
+              Checkout Now (${total})
             </Button>
             <Button
               variant="outline"

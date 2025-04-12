@@ -43,14 +43,14 @@ export default function CategoryNavigation() {
 
   return (
     <div className="w-7xl container mx-auto mb-12 mt-8">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 hover:text-gray-100 ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 hover:text-gray-100">
         {categories.map((category) => (
           <Link
             key={category.name}
             href={category.href}
             className="bg-white pt-4 pb-4 rounded-md flex flex-col items-center justify-center transition-transform hover:scale-105"
           >
-            <div className="w-24 h-24 relative">
+            <div className="w-24 h-24 relative peer">
               <Image
                 src={category.image || "/placeholder.svg"}
                 alt={category.name}
@@ -58,7 +58,7 @@ export default function CategoryNavigation() {
                 className="object-contain"
               />
             </div>
-            <h3 className="text-center font-medium hover:bg-black hover:text-gray-100 text-gray-800">
+            <h3 className="text-center w-full p-1.5 font-medium peer-hover:bg-black peer-hover:text-gray-100 text-gray-800">
               {category.name}
             </h3>
           </Link>

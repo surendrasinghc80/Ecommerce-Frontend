@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Star, Eye, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import AddToCartButton from "./AddToCartButton";
 
 interface Product {
   id: string;
@@ -192,12 +193,13 @@ function CarouselItems() {
               </span>
             </div>
 
-            <Button
+            {/* <Button
               variant="outline"
               className="w-full border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer"
             >
               Add To Cart
-            </Button>
+            </Button> */}
+            <AddToCartButton item={product} />
           </div>
         ))}
       </div>

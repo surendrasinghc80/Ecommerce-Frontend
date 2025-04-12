@@ -56,6 +56,7 @@ import { signOut, signIn, useSession } from "next-auth/react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CartSidebar } from "@/components/Cart";
 
 const registerSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -67,6 +68,7 @@ type RegisterForm = z.infer<typeof registerSchema>;
 export default function Header() {
   const { data: session, status } = useSession();
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const {
     register,
@@ -306,13 +308,23 @@ export default function Header() {
                 </DialogFooter>
               </DialogContent>
             </Dialog>
-            <Button variant="ghost" size="icon" className="relative">
+
+            <Button
+              onClick={() => setIsCartOpen(true)}
+              variant="ghost"
+              size="icon"
+              className="relative"
+            >
               <ShoppingCart className="h-10 w-10" />
               {/* Cart Badge (Optional) */}
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 3
               </span>
             </Button>
+            <CartSidebar
+              isOpen={isCartOpen}
+              onClose={() => setIsCartOpen(false)}
+            />
           </div>
         </div>
 

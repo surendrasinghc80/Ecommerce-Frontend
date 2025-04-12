@@ -1,7 +1,7 @@
 "use client";
 import {
   ChevronDown,
-  ShoppingCart,
+  ShoppingBag,
   Grid,
   Search,
   Computer,
@@ -317,7 +317,7 @@ export default function Header() {
               size="icon"
               className="relative"
             >
-              <ShoppingCart className="h-10 w-10" />
+              <ShoppingBag className="h-10 w-10" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {cart.length === 0 ? "" : cart.length}
               </span>

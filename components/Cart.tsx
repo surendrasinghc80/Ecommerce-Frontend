@@ -11,16 +11,17 @@ interface CartSidebarProps {
   onClose: () => void;
 }
 
-interface item {
+export interface CartItem {
   id: number;
   name: string;
   price: number;
-  quantity: number;
   imageSrc: string;
+  quantity: number;
 }
 
 export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
-  const { cart, removeFromCart, total } = useCart();
+  const { cart, removeFromCart, total, incrementQuantity, decrementQuantity } =
+    useCart();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -65,7 +66,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto py-2">
-            {cart.map((item: any) => (
+            {cart.map((item: CartItem) => (
               <div key={item.id} className="p-4 border-b">
                 <div className="flex gap-4">
                   {/* Product Image */}
@@ -83,7 +84,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                     <div className="flex justify-between">
                       <h3 className="font-medium text-sm">{item.name}</h3>
                       <button
-                        onClick={() => removeFromCart(item._id)}
+                        onClick={() => removeFromCart(item.id)}
                         className="text-gray-400 hover:text-gray-600"
                       >
                         <X className="h-4 w-4" />
@@ -95,11 +96,17 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
                       {/* Quantity Controls */}
                       <div className="flex items-center gap-2">
-                        <button className="p-1 border rounded-md hover:bg-gray-100">
+                        <button
+                          onClick={() => decrementQuantity(item.id)}
+                          className="p-1 border rounded-md hover:bg-gray-100"
+                        >
                           <Minus className="h-3 w-3" />
                         </button>
                         <span className="w-6 text-center">{item.quantity}</span>
-                        <button className="p-1 border rounded-md hover:bg-gray-100">
+                        <button
+                          onClick={() => incrementQuantity(item.id)}
+                          className="p-1 border rounded-md hover:bg-gray-100"
+                        >
                           <Plus className="h-3 w-3" />
                         </button>
                       </div>

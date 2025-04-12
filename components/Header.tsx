@@ -57,6 +57,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CartSidebar } from "@/components/Cart";
+import { useCart } from "@/context/CartContext";
 
 const registerSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -66,6 +67,7 @@ const registerSchema = z.object({
 type RegisterForm = z.infer<typeof registerSchema>;
 
 export default function Header() {
+  const { cart } = useCart();
   const { data: session, status } = useSession();
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -316,9 +318,8 @@ export default function Header() {
               className="relative"
             >
               <ShoppingCart className="h-10 w-10" />
-              {/* Cart Badge (Optional) */}
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                3
+                {cart.length === 0 ? "" : cart.length}
               </span>
             </Button>
             <CartSidebar

@@ -192,19 +192,10 @@ function CarouselItems() {
                 ({product.reviewCount})
               </span>
             </div>
-
-            {/* <Button
-              variant="outline"
-              className="w-full border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer"
-            >
-              Add To Cart
-            </Button> */}
             <AddToCartButton item={product} />
           </div>
         ))}
       </div>
-
-      {/* Product Quick View Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-[600px] text-pink-600">
           {selectedProduct && (

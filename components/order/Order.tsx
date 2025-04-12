@@ -22,7 +22,7 @@ function Order() {
             </div>
             <div>
               <div className="flex flex-row p-2 pl-0 text-sm text-normal cursor-pointer hover:text-pink-600">
-                <Link href="/dashboard" className="flex flex-row">
+                <Link href="/track-orders" className="flex flex-row">
                   <User className="h-5 w-5 mr-2" />
                   <p>Orders</p>
                 </Link>

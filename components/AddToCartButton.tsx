@@ -2,6 +2,13 @@
 import { useCart } from "@/context/CartContext";
 import { Button } from "./ui/button";
 
+// export interface CartItem {
+//   id: number;
+//   name: string;
+//   price: number;
+//   imageSrc: string;
+// }
+
 export default function AddToCartButton({ item }: { item: any }) {
   const { addToCart } = useCart();
 

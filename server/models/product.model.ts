@@ -19,7 +19,6 @@ class Product
   public name!: string;
   public description!: string;
   public basePrice!: number;
-
   // timestamps!
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;

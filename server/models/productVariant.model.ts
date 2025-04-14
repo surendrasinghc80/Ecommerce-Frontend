@@ -67,7 +67,7 @@ ProductVariant.init(
   {
     sequelize,
     modelName: "ProductVariant",
-    tableName: "product_variants",
+    tableName: "productvariants",
     timestamps: true,
   }
 );

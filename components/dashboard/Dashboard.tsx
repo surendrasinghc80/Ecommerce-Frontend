@@ -64,7 +64,7 @@ export function Dashboard() {
   };
 
   return (
-    <div className="flex flex-row w-2/3 mx-auto my-8  relative bg-gray-100">
+    <div className="flex flex-row w-3/4 mx-auto my-8  relative bg-gray-100">
       <div className="basis-[20%] text-zinc-600">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>

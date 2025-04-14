@@ -76,9 +76,26 @@ export async function POST(req: NextRequest) {
       }
 
       await transaction.commit();
+      const fullProduct = await Product.findByPk(product.id, {
+        include: [
+          {
+            model: ProductVariant,
+            as: "variants", // only if you defined the alias
+          },
+          {
+            model: ProductImage,
+            as: "images", // only if you defined the alias
+          },
+        ],
+      });
+
       return NextResponse.json(
-        { success: true, message: "Product created successfully", product },
-        { status: 201 } // Created
+        {
+          success: true,
+          message: "Product created successfully",
+          product: fullProduct,
+        },
+        { status: 201 }
       );
     } catch (err) {
       await transaction.rollback();

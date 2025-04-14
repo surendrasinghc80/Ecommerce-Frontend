@@ -197,12 +197,12 @@ export default function Header() {
                     Log in with email & password
                   </DialogDescription>
                 </DialogHeader>
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="bg-white w-sm text-center p-6 rounded-t-sm"
-                >
-                  <div className="flex flex-col">
-                    <div className="flex flex-col ">
+                <div className="flex flex-col">
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="bg-white w-sm text-center rounded-t-sm"
+                  >
+                    <div className="flex flex-col w-full mr-2 ">
                       <Label htmlFor="email" className="text-right pb-2">
                         Email or Phone Number
                       </Label>
@@ -246,42 +246,42 @@ export default function Header() {
                         {isSubmitting ? "Logging..." : "Login"}
                       </Button>
                     </div>
-                    <DropdownMenuSeparator className="mt-5 mb-5" />
-                    <Button className="w-full bg-blue-900 cursor-pointer mb-5 ">
+                  </form>
+                  <DropdownMenuSeparator className="mt-5 mb-5" />
+                  <Button className="w-full bg-blue-900 cursor-pointer mb-5 ">
+                    <Image
+                      src={"/images/facebook-logo.png"}
+                      alt="Google logo"
+                      height={20}
+                      width={20}
+                      className="object-contain"
+                    />
+                    Continue with Facebook
+                  </Button>
+
+                  {status === "authenticated" ? (
+                    <Button
+                      onClick={() => signOut()}
+                      className="w-full bg-red-400 cursor-pointer hover:bg-red-500 "
+                    >
+                      Sign Out {session?.user?.name}!
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => signIn("google")}
+                      className="w-full bg-blue-500 cursor-pointer hover:bg-blue-600 "
+                    >
                       <Image
-                        src={"/images/facebook-logo.png"}
+                        src={"/images/google-logo.png"}
                         alt="Google logo"
                         height={20}
                         width={20}
                         className="object-contain"
                       />
-                      Continue with Facebook
+                      Continue with Google
                     </Button>
-
-                    {status === "authenticated" ? (
-                      <Button
-                        onClick={() => signOut()}
-                        className="w-full bg-red-400 cursor-pointer hover:bg-red-500 "
-                      >
-                        Sign Out {session?.user?.name}!
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() => signIn("google")}
-                        className="w-full bg-blue-500 cursor-pointer hover:bg-blue-600 "
-                      >
-                        <Image
-                          src={"/images/google-logo.png"}
-                          alt="Google logo"
-                          height={20}
-                          width={20}
-                          className="object-contain"
-                        />
-                        Continue with Google
-                      </Button>
-                    )}
-                  </div>
-                </form>
+                  )}
+                </div>
                 <DialogFooter>
                   <div className="flex flex-col w-full justify-center items-center">
                     {status === "authenticated" ? null : (
@@ -319,7 +319,7 @@ export default function Header() {
             >
               <ShoppingBag className="h-10 w-10" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {cart.length === 0 ? "" : cart.length}
+                {cart.length === 0 ? "0" : cart.length}
               </span>
             </Button>
             <CartSidebar

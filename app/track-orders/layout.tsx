@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Create Account | Bonik",
+  title: "User Info | Bonik",
   description: "Your favourite shopping place",
 };
 

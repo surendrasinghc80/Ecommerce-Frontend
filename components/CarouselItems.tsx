@@ -1,19 +1,31 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Star, Eye, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import AddToCartButton from "./AddToCartButton";
+import axios from "axios";
 
 interface Product {
   id: string;
   name: string;
-  price: number;
-  rating: number;
-  reviewCount: number;
-  imageSrc: string;
+  basePrice: number;
+  rating?: number;
+  reviewCount?: number;
+  images: { imageUrl: string }[];
+  variants: {
+    color: string;
+    size: string;
+    priceOverride: string;
+  }[];
 }
 
 function CarouselItems() {
@@ -21,72 +33,23 @@ function CarouselItems() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const products: Product[] = [
-    {
-      id: "1",
-      name: "Silver High Neck Sweater",
-      price: 210.0,
-      rating: 4,
-      reviewCount: 225,
-      imageSrc: "/images/IMG-20250331-WA0003.png",
-    },
-    {
-      id: "2",
-      name: "Yellow Casual Sweater",
-      price: 110.0,
-      rating: 4,
-      reviewCount: 156,
-      imageSrc: "/images/IMG-20250331-WA0002.png",
-    },
-    {
-      id: "3",
-      name: "Denim Blue Jeans",
-      price: 140.0,
-      rating: 4,
-      reviewCount: 741,
-      imageSrc: "/images/IMG-20250331-WA0004.png",
-    },
-    {
-      id: "4",
-      name: "Black White Sweater",
-      price: 180.0,
-      rating: 4,
-      reviewCount: 123,
-      imageSrc: "/images/IMG-20250331-WA0001.png",
-    },
-    {
-      id: "5",
-      name: "Silver High Neck Sweater",
-      price: 95.0,
-      rating: 5,
-      reviewCount: 89,
-      imageSrc: "/images/IMG-20250331-WA0003.png",
-    },
-    {
-      id: "6",
-      name: "Yellow Casual Sweater",
-      price: 75.0,
-      rating: 4,
-      reviewCount: 162,
-      imageSrc: "/images/IMG-20250331-WA0002.png",
-    },
-    {
-      id: "7",
-      name: "Denim Blue Jeans",
-      price: 250.0,
-      rating: 5,
-      reviewCount: 203,
-      imageSrc: "/images/IMG-20250331-WA0004.png",
-    },
-    {
-      id: "8",
-      name: "Black White Sweater",
-      price: 120.0,
-      rating: 4,
-      reviewCount: 178,
-      imageSrc: "/images/IMG-20250331-WA0001.png",
-    },
-  ];
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get("/api/products");
+        setProducts(res.data.products || []);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleOpenDialog = (product: Product) => {
     setSelectedProduct(product);
@@ -157,14 +120,14 @@ function CarouselItems() {
             key={product.id}
             className="bg-white p-6 rounded-md shadow-sm flex flex-col items-center border hover:border-black"
           >
-            <div className="w-full h-48 relative group mb-4 cursor-pointer">
+            <div className="w-full h-90 relative group mb-4 cursor-pointer">
               <Image
-                src={product.imageSrc || "/placeholder.svg"}
+                src={product.images?.[0]?.imageUrl || "/placeholder.svg"}
                 alt={product.name}
                 fill
                 className="object-contain"
               />
-              <div className="absolute opacity-0 right-0 translate-x-10 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="absolute opacity-0 top-2 right-0 translate-x-10 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
                 <button onClick={() => handleOpenDialog(product)}>
                   <Eye className="h-7 w-7 p-1" />
                 </button>
@@ -174,24 +137,8 @@ function CarouselItems() {
 
             <h3 className="text-gray-700 text-center mb-2">{product.name}</h3>
             <p className="font-medium text-gray-900 mb-2">
-              ${product.price.toFixed(2)}
+              ₹ {Number(product.basePrice).toFixed(2)}
             </p>
-
-            <div className="flex items-center mb-4">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-4 h-4 ${
-                    i < product.rating
-                      ? "fill-yellow-400 text-yellow-400"
-                      : "fill-gray-200 text-gray-200"
-                  }`}
-                />
-              ))}
-              <span className="text-xs text-gray-500 ml-1">
-                ({product.reviewCount})
-              </span>
-            </div>
             <AddToCartButton item={product} />
           </div>
         ))}
@@ -200,14 +147,17 @@ function CarouselItems() {
         <DialogContent className="sm:max-w-[600px] text-pink-600">
           {selectedProduct && (
             <>
-              <DialogHeader>
-                {/* <DialogTitle>{selectedProduct.name}</DialogTitle> */}
-              </DialogHeader>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-4">
-                <div className="relative h-64 w-full">
+              <DialogHeader />
+              <VisuallyHidden>
+                <DialogTitle>{selectedProduct.name}</DialogTitle>
+              </VisuallyHidden>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-4 px-4">
+                <div className="relative h-120 w-full">
                   <Image
-                    src={selectedProduct.imageSrc || "/placeholder.svg"}
+                    src={
+                      selectedProduct.images?.[0]?.imageUrl ||
+                      "/placeholder.svg"
+                    }
                     alt={selectedProduct.name}
                     fill
                     className="object-contain"
@@ -229,18 +179,18 @@ function CarouselItems() {
                         <Star
                           key={i}
                           className={`w-4 h-4 ${
-                            i < selectedProduct.rating
+                            i < (selectedProduct.rating || 0)
                               ? "fill-yellow-400 text-yellow-400"
                               : "fill-gray-200 text-gray-200"
                           }`}
                         />
                       ))}
                       <span className="text-xs text-gray-500 ml-1">
-                        ({selectedProduct.reviewCount} reviews)
+                        ({selectedProduct.reviewCount ?? 0} reviews)
                       </span>
                     </div>
                     <p className="text-2xl text-pink-600 font-bold">
-                      ${selectedProduct.price.toFixed(2)}
+                      ₹ {Number(selectedProduct.basePrice).toFixed(2)}
                     </p>
                     <span className="text-sm text-gray-600 mb-5">
                       Stock Available
@@ -252,7 +202,7 @@ function CarouselItems() {
                     </Button>
                   </div>
                   <div className="flex text-sm ">
-                    <span className="text-gray-600  pr-2">Sold By:</span>
+                    <span className="text-gray-600 pr-2">Sold By:</span>
                     <p className=" text-black">Mobile Store</p>
                   </div>
                 </div>

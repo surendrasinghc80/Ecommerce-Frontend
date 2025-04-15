@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
     config.ignoreWarnings = [{ module: /sequelize/ }];
     return config;
   },
+  images: {
+    domains: ["s3.ap-south-1.amazonaws.com"],
+  },
 };
 
 export default nextConfig;

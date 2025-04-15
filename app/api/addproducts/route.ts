@@ -80,11 +80,11 @@ export async function POST(req: NextRequest) {
         include: [
           {
             model: ProductVariant,
-            as: "variants", // only if you defined the alias
+            as: "variants",
           },
           {
             model: ProductImage,
-            as: "images", // only if you defined the alias
+            as: "images",
           },
         ],
       });

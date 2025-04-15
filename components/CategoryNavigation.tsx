@@ -48,7 +48,7 @@ export default function CategoryNavigation() {
           <Link
             key={category.name}
             href={category.href}
-            className="bg-white pt-4 pb-4 rounded-md flex flex-col items-center justify-center transition-transform hover:scale-105"
+            className="bg-white p-4  pb-4 rounded-md flex flex-col items-center justify-center transition-transform hover:scale-105"
           >
             <div className="w-24 h-24 relative peer">
               <Image
@@ -58,7 +58,7 @@ export default function CategoryNavigation() {
                 className="object-contain"
               />
             </div>
-            <h3 className="text-center w-full p-1.5 font-medium peer-hover:bg-black peer-hover:text-gray-100 text-gray-800">
+            <h3 className="rounded-sm text-center w-full p-1.5 mt-2 font-medium peer-hover:bg-black peer-hover:text-gray-100 text-gray-800">
               {category.name}
             </h3>
           </Link>

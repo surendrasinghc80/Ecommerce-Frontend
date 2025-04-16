@@ -44,7 +44,7 @@ export function AddToCartFilledButton({ product }: { product: any }) {
 
   return (
     <Button
-      className="w-full bg-pink-600 cursor-pointer text-white"
+      className="bg-red-500 text-white px-4 py-2 rounded-md mt-2"
       onClick={handleAdd}
     >
       Add To Cart

@@ -16,7 +16,7 @@ export default function Home() {
       <div className="fixed top-0 w-full z-50">
         <Header />
       </div>
-      <div className="pt-35">
+      <div className="pt-5">
         <HeroSection />
       </div>
       <Featured />

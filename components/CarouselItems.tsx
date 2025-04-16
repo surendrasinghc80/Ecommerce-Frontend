@@ -8,9 +8,9 @@ import {
   Heart,
   ChevronLeft,
   ChevronRight,
-  AlertTriangle,
+  Minus,
+  Plus,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -18,8 +18,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import AddToCartButton from "./AddToCartButton";
+import {
+  AddToCartButton,
+  AddToCartFilledButton,
+} from "@/components/AddToCartButton";
 import axios from "axios";
+import { useCart } from "@/context/CartContext";
 
 interface Product {
   id: string;
@@ -40,7 +44,9 @@ function CarouselItems() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
-
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { incrementQuantity, decrementQuantity, cart, removeFromCart, total } =
+    useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -60,8 +66,14 @@ function CarouselItems() {
   }, []);
 
   const handleOpenDialog = (product: Product) => {
+    const defaultColor = product.variants?.[0]?.color || null;
+    const defaultImage =
+      product.images?.find((img: any) => img.color === defaultColor)
+        ?.imageUrl || null;
+
     setSelectedProduct(product);
-    setSelectedColor(product.variants?.[0]?.color || null); // Default color
+    setSelectedColor(defaultColor);
+    setSelectedImage(defaultImage);
     setOpen(true);
   };
 
@@ -148,7 +160,35 @@ function CarouselItems() {
             <p className="font-medium text-gray-900 mb-2">
               ₹ {Number(product.basePrice).toFixed(2)}
             </p>
-            <AddToCartButton product={product} />
+
+            {cart.find(
+              (item: { id: string | number }) => item.id === product.id
+            ) ? (
+              <div className="flex items-center justify-around gap-2 w-full">
+                <button
+                  onClick={() => decrementQuantity(product.id)}
+                  className="p-1 border rounded-md hover:bg-gray-100"
+                >
+                  <Minus className="h-3 w-3" />
+                </button>
+                <span className="w-6 text-center">
+                  {
+                    cart.find(
+                      (item: { id: string | number; quantity: number }) =>
+                        item.id === product.id
+                    )?.quantity // <-- show correct quantity
+                  }
+                </span>
+                <button
+                  onClick={() => incrementQuantity(product.id)}
+                  className="p-1 border rounded-md hover:bg-gray-100"
+                >
+                  <Plus className="h-3 w-3" />
+                </button>
+              </div>
+            ) : (
+              <AddToCartButton product={product} />
+            )}
           </div>
         ))}
       </div>
@@ -164,10 +204,7 @@ function CarouselItems() {
                 <div>
                   <div className="relative h-100 self-center w-full">
                     <Image
-                      src={
-                        selectedProduct.images?.[0]?.imageUrl ||
-                        "/placeholder.svg"
-                      }
+                      src={selectedImage || "/placeholder.svg"}
                       alt={selectedProduct.name}
                       height={400}
                       width={400}
@@ -228,24 +265,33 @@ function CarouselItems() {
                   <div className="grid grid-row-2 gap-2 my-2">
                     {Array.from(
                       new Set(selectedProduct.variants.map((v) => v.color))
-                    ).map((color) => (
-                      <button
-                        key={color}
-                        className={`px-3 py-1 border rounded ${
-                          color === selectedColor
-                            ? "bg-pink-600 text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() => setSelectedColor(color)}
-                      >
-                        {color}
-                      </button>
-                    ))}
+                    ).map((color) => {
+                      const colorImage = selectedProduct.images.find(
+                        (img: any) => img.color === color
+                      );
+
+                      return (
+                        <button
+                          key={color}
+                          onClick={() => {
+                            setSelectedColor(color);
+                            setSelectedImage(
+                              colorImage?.imageUrl || "/placeholder.svg"
+                            );
+                          }}
+                          className={`px-3 py-1 border rounded ${
+                            selectedColor === color
+                              ? "bg-pink-600 text-white"
+                              : "bg-gray-200"
+                          }`}
+                        >
+                          {color}
+                        </button>
+                      );
+                    })}
                   </div>
                   <div className="space-y-3 m-5 ml-0 w-25">
-                    <Button className="w-full bg-pink-600 cursor-pointer text-white">
-                      Add To Cart
-                    </Button>
+                    <AddToCartFilledButton product={selectedProduct} />
                   </div>
                   <div className="flex text-sm ">
                     <span className="text-gray-600 pr-2">Sold By:</span>

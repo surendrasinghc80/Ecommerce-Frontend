@@ -3,14 +3,14 @@ import { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
+import { Heart, ShoppingCart, Star, Eye, Minus } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import AddToCartButton from "./AddToCartButton";
+import { WishlistButton } from "@/components/AddToCartButton";
 import Image from "next/image";
 
 interface Product {
@@ -134,7 +134,7 @@ export function WishlistGrid() {
               <Heart className="h-7 w-7 p-1 fill-current" />
             </div>
           </div>
-          <CardContent className="p-4">
+          <CardContent className="p-4 pb-0">
             <h3 className="font-medium text-gray-900 mb-1">{product.name}</h3>
             <div className="flex items-center mb-4">
               {[...Array(5)].map((_, i) => (
@@ -160,9 +160,17 @@ export function WishlistGrid() {
               {product.inStock ? "In Stock" : "Out of Stock"}
             </p>
           </CardContent>
-          <CardFooter className="p-4 pt-0">
+          <CardFooter className="p-4">
             {product.inStock === true ? (
-              <AddToCartButton item={product} />
+              <div className="items-end">
+                <div className="flex flex-col gap-2 justify-items-end items-center">
+                  <Button className="hover:bg-pink-600 bg-white cursor-pointer border-1 border-pink-200 hover:border-pink-600 border-solid hover:text-white text-pink-600">
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <p>2</p>
+                  <WishlistButton product={product} />
+                </div>
+              </div>
             ) : (
               <Button
                 className="w-full cursor-not-allowed "

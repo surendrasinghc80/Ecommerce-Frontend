@@ -74,7 +74,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                     <Image
                       src={product.imageUrl || "/placeholder.svg"}
                       alt={product.name}
-                      fill
+                      height={60}
+                      width={60}
                       className="object-cover"
                     />
                   </div>

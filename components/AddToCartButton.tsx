@@ -1,9 +1,12 @@
 "use client";
 import { useCart } from "@/context/CartContext";
 import { Button } from "./ui/button";
+import { Minus, Plus } from "lucide-react";
 
-export default function AddToCartButton({ product }: { product: any }) {
+// Default style button
+export function AddToCartButton({ product }: { product: any }) {
   const { addToCart } = useCart();
+
   const handleAdd = () => {
     const cartItem = {
       id: product.id,
@@ -21,6 +24,53 @@ export default function AddToCartButton({ product }: { product: any }) {
       onClick={handleAdd}
     >
       Add To Cart
+    </Button>
+  );
+}
+
+// Alternate filled-style button
+export function AddToCartFilledButton({ product }: { product: any }) {
+  const { addToCart } = useCart();
+
+  const handleAdd = () => {
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      basePrice: product.basePrice,
+      imageUrl: product.images?.[0]?.imageUrl || "/placeholder.svg",
+    };
+    addToCart(cartItem);
+  };
+
+  return (
+    <Button
+      className="w-full bg-pink-600 cursor-pointer text-white"
+      onClick={handleAdd}
+    >
+      Add To Cart
+    </Button>
+  );
+}
+
+export function WishlistButton({ product }: { product: any }) {
+  const { addToCart } = useCart();
+
+  const handleAdd = () => {
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      basePrice: product.basePrice,
+      imageUrl: product.images?.[0]?.imageUrl || "/placeholder.svg",
+    };
+    addToCart(cartItem);
+  };
+
+  return (
+    <Button
+      className="hover:bg-pink-600 bg-white cursor-pointer border-1 border-pink-200 hover:border-pink-600 border-solid hover:text-white text-pink-600"
+      onClick={handleAdd}
+    >
+      <Plus className="h-5 w-5" />
     </Button>
   );
 }

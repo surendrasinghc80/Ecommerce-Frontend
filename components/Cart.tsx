@@ -14,8 +14,8 @@ interface CartSidebarProps {
 export interface CartItem {
   id: number;
   name: string;
-  price: number;
-  imageSrc: string;
+  basePrice: number;
+  imageUrl: string;
   quantity: number;
 }
 
@@ -66,14 +66,14 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto py-2">
-            {cart.map((item: CartItem) => (
-              <div key={item.id} className="p-4 border-b">
+            {cart.map((product: CartItem) => (
+              <div key={product.id} className="p-4 border-b">
                 <div className="flex gap-4">
                   {/* Product Image */}
                   <div className="relative h-20 w-20 flex-shrink-0">
                     <Image
-                      src={item.imageSrc || "/placeholder.svg"}
-                      alt={item.name}
+                      src={product.imageUrl || "/placeholder.svg"}
+                      alt={product.name}
                       fill
                       className="object-cover"
                     />
@@ -82,9 +82,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   {/* Product Details */}
                   <div className="flex-1">
                     <div className="flex justify-between">
-                      <h3 className="font-medium text-sm">{item.name}</h3>
+                      <h3 className="font-medium text-sm">{product.name}</h3>
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(product.id)}
                         className="text-gray-400 hover:text-gray-600"
                       >
                         <X className="h-4 w-4" />
@@ -92,19 +92,23 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                     </div>
                     <p className="text-xs text-gray-500 mt-1">size</p>
                     <div className="flex justify-between items-center mt-2">
-                      <p className="font-medium text-rose-500">${item.price}</p>
+                      <p className="font-medium text-rose-500">
+                        ₹ {product.basePrice}
+                      </p>
 
                       {/* Quantity Controls */}
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => decrementQuantity(item.id)}
+                          onClick={() => decrementQuantity(product.id)}
                           className="p-1 border rounded-md hover:bg-gray-100"
                         >
                           <Minus className="h-3 w-3" />
                         </button>
-                        <span className="w-6 text-center">{item.quantity}</span>
+                        <span className="w-6 text-center">
+                          {product.quantity}
+                        </span>
                         <button
-                          onClick={() => incrementQuantity(item.id)}
+                          onClick={() => incrementQuantity(product.id)}
                           className="p-1 border rounded-md hover:bg-gray-100"
                         >
                           <Plus className="h-3 w-3" />
@@ -123,7 +127,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               className="w-full bg-rose-500 hover:bg-rose-600 text-white"
               size="lg"
             >
-              Checkout Now (${total})
+              Checkout Now (₹{total})
             </Button>
             <Button
               variant="outline"

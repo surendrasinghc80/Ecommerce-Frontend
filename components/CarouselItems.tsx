@@ -2,7 +2,14 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, Eye, Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Star,
+  Eye,
+  Heart,
+  ChevronLeft,
+  ChevronRight,
+  AlertTriangle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -32,6 +39,7 @@ function CarouselItems() {
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -53,6 +61,7 @@ function CarouselItems() {
 
   const handleOpenDialog = (product: Product) => {
     setSelectedProduct(product);
+    setSelectedColor(product.variants?.[0]?.color || null); // Default color
     setOpen(true);
   };
 
@@ -118,7 +127,7 @@ function CarouselItems() {
         {visibleProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-white p-6 rounded-md shadow-sm flex flex-col items-center border hover:border-black"
+            className="bg-white p-6 rounded-md shadow-sm flex flex-col items-center border hover:border-gray-500 transition duration-300"
           >
             <div className="w-full h-90 relative group mb-4 cursor-pointer">
               <Image
@@ -139,7 +148,7 @@ function CarouselItems() {
             <p className="font-medium text-gray-900 mb-2">
               ₹ {Number(product.basePrice).toFixed(2)}
             </p>
-            <AddToCartButton item={product} />
+            <AddToCartButton product={product} />
           </div>
         ))}
       </div>
@@ -152,18 +161,38 @@ function CarouselItems() {
                 <DialogTitle>{selectedProduct.name}</DialogTitle>
               </VisuallyHidden>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-4 px-4">
-                <div className="relative h-120 w-full">
-                  <Image
-                    src={
-                      selectedProduct.images?.[0]?.imageUrl ||
-                      "/placeholder.svg"
-                    }
-                    alt={selectedProduct.name}
-                    fill
-                    className="object-contain"
-                  />
+                <div>
+                  <div className="relative h-100 self-center w-full">
+                    <Image
+                      src={
+                        selectedProduct.images?.[0]?.imageUrl ||
+                        "/placeholder.svg"
+                      }
+                      alt={selectedProduct.name}
+                      height={400}
+                      width={400}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    {selectedProduct.images
+                      ?.filter((img: any) => img.color === selectedColor) // Filter by selected color
+                      .map((img, index) => (
+                        <div
+                          key={index}
+                          className="rounded-lg border bg-gray-100 p-1 border-red-400 cursor-pointer"
+                        >
+                          <Image
+                            src={img.imageUrl}
+                            alt={`Product Image ${index + 1}`}
+                            width={80}
+                            height={80}
+                            className="object-cover rounded"
+                          />
+                        </div>
+                      ))}
+                  </div>
                 </div>
-
                 <div className="flex flex-col justify-between">
                   <div>
                     <h3 className="font-bold text-3xl text-black mb-2">
@@ -195,6 +224,23 @@ function CarouselItems() {
                     <span className="text-sm text-gray-600 mb-5">
                       Stock Available
                     </span>
+                  </div>
+                  <div className="grid grid-row-2 gap-2 my-2">
+                    {Array.from(
+                      new Set(selectedProduct.variants.map((v) => v.color))
+                    ).map((color) => (
+                      <button
+                        key={color}
+                        className={`px-3 py-1 border rounded ${
+                          color === selectedColor
+                            ? "bg-pink-600 text-white"
+                            : "bg-gray-200"
+                        }`}
+                        onClick={() => setSelectedColor(color)}
+                      >
+                        {color}
+                      </button>
+                    ))}
                   </div>
                   <div className="space-y-3 m-5 ml-0 w-25">
                     <Button className="w-full bg-pink-600 cursor-pointer text-white">

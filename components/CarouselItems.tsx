@@ -142,12 +142,14 @@ function CarouselItems() {
             className="bg-white p-6 rounded-md shadow-sm flex flex-col items-center border hover:border-gray-500 transition duration-300"
           >
             <div className="w-full h-90 relative group mb-4 cursor-pointer">
-              <Image
-                src={product.images?.[0]?.imageUrl || "/placeholder.svg"}
-                alt={product.name}
-                fill
-                className="object-contain"
-              />
+              <Link href={`/product/${product.id}`}>
+                <Image
+                  src={product.images?.[0]?.imageUrl || "/placeholder.svg"}
+                  alt={product.name}
+                  fill
+                  className="object-contain"
+                />
+              </Link>
               <div className="absolute opacity-0 top-2 right-0 translate-x-10 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
                 <button onClick={() => handleOpenDialog(product)}>
                   <Eye className="h-7 w-7 p-1" />

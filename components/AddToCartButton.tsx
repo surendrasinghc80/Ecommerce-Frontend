@@ -1,7 +1,7 @@
 "use client";
 import { useCart } from "@/context/CartContext";
 import { Button } from "./ui/button";
-import { Minus, Plus, ShoppingBag } from "lucide-react";
+import { Plus, ShoppingBag } from "lucide-react";
 
 // Default style button
 export function AddToCartButton({ product }: { product: any }) {
@@ -11,6 +11,10 @@ export function AddToCartButton({ product }: { product: any }) {
     const cartItem = {
       id: product.id,
       name: product.name,
+      brandName: product.brandName, //newly added
+      size: product.size, //newly added
+      color: product.color, //newly added
+      description: product.description, //newly added
       basePrice: product.basePrice,
       imageUrl: product.images?.[0]?.imageUrl || "/placeholder.svg",
     };

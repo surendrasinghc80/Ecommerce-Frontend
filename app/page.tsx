@@ -28,7 +28,6 @@ export default function Home() {
       <Banner2 />
       <CategoryAndItems />
       <Gifts />
-      <Footer />
     </div>
   );
 }

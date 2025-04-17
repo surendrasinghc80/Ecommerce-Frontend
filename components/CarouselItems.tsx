@@ -25,6 +25,7 @@ import {
 import axios from "axios";
 import { useCart } from "@/context/CartContext";
 import { Button } from "./ui/button";
+import { DropdownMenuSeparator } from "./ui/dropdown-menu";
 
 interface Product {
   id: string;
@@ -270,14 +271,12 @@ function CarouselItems() {
                     <p className="text-2xl text-pink-600 font-bold">
                       ₹ {Number(selectedProduct.basePrice).toFixed(2)}
                     </p>
-                    <span className="text-sm text-gray-600 mb-5">
-                      Stock Available
-                    </span>
                   </div>
                   <div>
+                    <DropdownMenuSeparator className="mt-5 mb-5 bg-zinc-600" />
                     {/* Colors */}
                     <div className="font-semibold mb-1">Colors</div>
-                    <div className="flex gap-2 my-2">
+                    <div className="grid grid-cols-2 gap-2">
                       {Array.from(
                         new Set(selectedProduct.variants.map((v) => v.color))
                       ).map((color) => {
@@ -312,7 +311,7 @@ function CarouselItems() {
                     {selectedColor && (
                       <div className="mt-4">
                         <div className="font-semibold mb-1">Sizes</div>
-                        <div className="flex gap-2">
+                        <div className="grid grid-cols-2 gap-2">
                           {Array.from(
                             new Set(
                               selectedProduct.variants

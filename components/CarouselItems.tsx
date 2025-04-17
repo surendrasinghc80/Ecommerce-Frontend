@@ -39,6 +39,7 @@ interface Product {
   variants: {
     color: string;
     size: string;
+    stock: number;
     priceOverride: string;
   }[];
 }
@@ -48,6 +49,7 @@ function CarouselItems() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { incrementQuantity, decrementQuantity, cart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
@@ -272,41 +274,94 @@ function CarouselItems() {
                       Stock Available
                     </span>
                   </div>
-                  <div className="grid grid-row-2 gap-2 my-2">
-                    {Array.from(
-                      new Set(selectedProduct.variants.map((v) => v.color))
-                    ).map((color) => {
-                      const colorImage = selectedProduct.images.find(
-                        (img: any) => img.color === color
-                      );
+                  <div>
+                    {/* Colors */}
+                    <div className="font-semibold mb-1">Colors</div>
+                    <div className="flex gap-2 my-2">
+                      {Array.from(
+                        new Set(selectedProduct.variants.map((v) => v.color))
+                      ).map((color) => {
+                        const colorImage = selectedProduct.images.find(
+                          (img: any) => img.color === color
+                        );
 
-                      return (
-                        <Button
-                          variant={"outline"}
-                          key={color}
-                          onClick={() => {
-                            setSelectedColor(color);
-                            setSelectedImage(
-                              colorImage?.imageUrl || "/placeholder.svg"
-                            );
-                          }}
-                          className={`border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer transition duration-300 ${
-                            selectedColor === color
-                              ? "bg-white text-black"
-                              : "bg-gray-200"
-                          }`}
-                        >
-                          {color}
-                        </Button>
-                      );
-                    })}
+                        return (
+                          <Button
+                            variant="outline"
+                            key={color}
+                            onClick={() => {
+                              setSelectedColor(color);
+                              setSelectedSize(null); // reset size when color changes
+                              setSelectedImage(
+                                colorImage?.imageUrl || "/placeholder.svg"
+                              );
+                            }}
+                            className={`border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer transition duration-300 ${
+                              selectedColor === color
+                                ? "bg-white text-black"
+                                : "bg-gray-200"
+                            }`}
+                          >
+                            {color}
+                          </Button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Sizes */}
+                    {selectedColor && (
+                      <div className="mt-4">
+                        <div className="font-semibold mb-1">Sizes</div>
+                        <div className="flex gap-2">
+                          {Array.from(
+                            new Set(
+                              selectedProduct.variants
+                                .filter((v) => v.color === selectedColor)
+                                .map((v) => v.size)
+                            )
+                          ).map((size) => (
+                            <Button
+                              variant="outline"
+                              key={size}
+                              onClick={() => setSelectedSize(size)}
+                              className={`border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer transition duration-300 ${
+                                selectedSize === size
+                                  ? "bg-white text-black"
+                                  : "bg-gray-200"
+                              }`}
+                            >
+                              {size}
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Stock */}
+                    {selectedColor && selectedSize && (
+                      <div className="mt-4 text-sm text-gray-600">
+                        {(() => {
+                          const variant = selectedProduct.variants.find(
+                            (v) =>
+                              v.color === selectedColor &&
+                              v.size === selectedSize
+                          );
+                          return variant
+                            ? `Available stock: ${variant.stock}`
+                            : "Out of stock for this combination.";
+                        })()}
+                      </div>
+                    )}
                   </div>
-                  <div className="space-y-3 m-5 ml-0 w-25">
-                    <AddToCartFilledButton product={selectedProduct} />
-                  </div>
-                  <div className="flex text-sm ">
-                    <span className="text-gray-600 pr-2">Sold By:</span>
-                    <p className=" text-black">Mobile Store</p>
+
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="flex text-sm flex-col">
+                      <span className="text-gray-600 pr-2">Sold By:</span>
+                      <p className=" text-black">Mobile Store</p>
+                    </div>
+                    <div>
+                      <AddToCartFilledButton product={selectedProduct} />
+                    </div>
                   </div>
                 </div>
               </div>

@@ -7,7 +7,15 @@ import ProductImage from "@/server/models/productImage.model";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, description, basePrice, variants, images } = body;
+    const {
+      name,
+      description,
+      gender,
+      brandName,
+      basePrice,
+      variants,
+      images,
+    } = body;
 
     // Simple validation check
     if (!name || !description || !basePrice) {
@@ -22,7 +30,7 @@ export async function POST(req: NextRequest) {
     try {
       // 1. Create the product
       const product = await Product.create(
-        { name, description, basePrice },
+        { name, description, basePrice, gender, brandName },
         { transaction }
       );
 

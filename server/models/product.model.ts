@@ -5,6 +5,8 @@ export interface ProductAttributes {
   id?: number;
   name: string;
   description: string;
+  brandName: string;
+  gender: string;
   basePrice: number;
 }
 
@@ -18,8 +20,9 @@ class Product
   public id!: number;
   public name!: string;
   public description!: string;
+  public brandName!: string;
+  public gender!: string;
   public basePrice!: number;
-  // timestamps!
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -41,6 +44,13 @@ Product.init(
     description: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    brandName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    gender: {
+      type: DataTypes.STRING,
     },
     basePrice: {
       type: DataTypes.FLOAT,

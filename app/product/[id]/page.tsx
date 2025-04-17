@@ -7,6 +7,8 @@ interface Product {
   id: string;
   name: string;
   description?: string;
+  gender?: string;
+  brandName?: string;
   basePrice: number;
   images: { imageUrl: string }[];
 }
@@ -17,7 +19,7 @@ async function getProduct(id: string): Promise<Product | null> {
       `${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`
     );
     console.log("Fetched product data:", res.data);
-    return res.data.product; // ✅ Important!
+    return res.data.product;
   } catch (error) {
     console.error("Failed to fetch product", error);
     return null;

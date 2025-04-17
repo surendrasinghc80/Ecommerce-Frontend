@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, ShoppingCart, Star, Eye, Minus } from "lucide-react";
+import { Heart, Star, Eye, Minus } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { WishlistButton } from "@/components/AddToCartButton";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 interface Product {
   id: number;
@@ -27,6 +28,9 @@ interface Product {
 export function WishlistGrid() {
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { cart, removeFromCart, total, incrementQuantity, decrementQuantity } =
+    useCart();
+
   const products: Product[] = [
     {
       id: 1,
@@ -165,21 +169,32 @@ export function WishlistGrid() {
                 </p>
               </div>
               <div>
-                {product.inStock === true && product.id === product.id ? (
+                {cart.find(
+                  (item: { id: string | number; quantity: number }) =>
+                    item.id != product.id && product.inStock === false
+                ) ? (
+                  <></>
+                ) : (
                   <div className="items-end">
                     <div className="flex flex-col gap-2 justify-items-end items-center">
                       <Button
+                        onClick={() => decrementQuantity(product.id)}
                         size="iconSm"
                         className="hover:bg-pink-600 bg-white cursor-pointer border-1 border-pink-200 hover:border-pink-600 border-solid hover:text-white text-pink-600"
                       >
                         <Minus className="h-4 w-4" />
                       </Button>
-                      <p>2</p>
+                      <p>
+                        {
+                          cart.find(
+                            (item: { id: string | number; quantity: number }) =>
+                              item.id === product.id
+                          )?.quantity
+                        }
+                      </p>
                       <WishlistButton product={product} />
                     </div>
                   </div>
-                ) : (
-                  <></>
                 )}
               </div>
             </div>

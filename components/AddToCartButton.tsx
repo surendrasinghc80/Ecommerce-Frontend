@@ -1,7 +1,7 @@
 "use client";
 import { useCart } from "@/context/CartContext";
 import { Button } from "./ui/button";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, ShoppingBag } from "lucide-react";
 
 // Default style button
 export function AddToCartButton({ product }: { product: any }) {
@@ -23,6 +23,7 @@ export function AddToCartButton({ product }: { product: any }) {
       className="w-full border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer transition duration-300"
       onClick={handleAdd}
     >
+      <ShoppingBag className="h-5 w-5 mr-2" />
       Add To Cart
     </Button>
   );
@@ -44,9 +45,10 @@ export function AddToCartFilledButton({ product }: { product: any }) {
 
   return (
     <Button
-      className="bg-red-500 text-white px-4 py-2 rounded-md mt-2"
+      className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md mt-2"
       onClick={handleAdd}
     >
+      <ShoppingBag className="h-5 w-5 mr-2" />
       Add To Cart
     </Button>
   );

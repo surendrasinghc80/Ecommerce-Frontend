@@ -9,6 +9,8 @@ interface Product {
   id: string;
   name: string;
   description: string;
+  gender: string;
+  brandName: string;
   basePrice: number;
   rating?: number;
   reviewCount?: number;

@@ -356,6 +356,9 @@ export default function Header() {
                     <DropdownMenuItem className="cursor-pointer">
                       Women
                     </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer">
+                      Kids
+                    </DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuPortal>
               </DropdownMenuSub>

@@ -30,6 +30,9 @@ interface Product {
   id: string;
   name: string;
   basePrice: number;
+  description?: string;
+  gender?: string;
+  brandName?: string;
   rating?: number;
   reviewCount?: number;
   images: { imageUrl: string }[];
@@ -178,7 +181,7 @@ function CarouselItems() {
                     cart.find(
                       (item: { id: string | number; quantity: number }) =>
                         item.id === product.id
-                    )?.quantity // <-- show correct quantity
+                    )?.quantity
                   }
                 </span>
                 <button
@@ -205,13 +208,15 @@ function CarouselItems() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-4 px-4">
                 <div>
                   <div className="relative h-100 self-center w-full">
-                    <Image
-                      src={selectedImage || "/placeholder.svg"}
-                      alt={selectedProduct.name}
-                      height={400}
-                      width={400}
-                      className="object-contain"
-                    />
+                    <Link href={`/product/${selectedProduct.id}`}>
+                      <Image
+                        src={selectedImage || "/placeholder.svg"}
+                        alt={selectedProduct.name}
+                        height={400}
+                        width={400}
+                        className="object-contain"
+                      />
+                    </Link>
                   </div>
                   <div className="flex gap-2">
                     {selectedProduct.images
@@ -239,8 +244,11 @@ function CarouselItems() {
                     </h3>
                     <div className="flex m-5 ml-0">
                       <p className="text-gray-600">Band:</p>{" "}
-                      <span className="text-md text-black pl-2">Ziaomi</span>
+                      <span className="text-md text-black pl-2">
+                        {selectedProduct.brandName}
+                      </span>
                     </div>
+
                     <div className="flex items-center mb-4">
                       <span className="text-gray-600 pr-2">Rated:</span>
                       {[...Array(5)].map((_, i) => (
@@ -273,7 +281,8 @@ function CarouselItems() {
                       );
 
                       return (
-                        <button
+                        <Button
+                          variant={"outline"}
                           key={color}
                           onClick={() => {
                             setSelectedColor(color);
@@ -281,14 +290,14 @@ function CarouselItems() {
                               colorImage?.imageUrl || "/placeholder.svg"
                             );
                           }}
-                          className={`px-3 py-1 border rounded ${
+                          className={`border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer transition duration-300 ${
                             selectedColor === color
-                              ? "bg-pink-600 text-white"
+                              ? "bg-white text-black"
                               : "bg-gray-200"
                           }`}
                         >
                           {color}
-                        </button>
+                        </Button>
                       );
                     })}
                   </div>

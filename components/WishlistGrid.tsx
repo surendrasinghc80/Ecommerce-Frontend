@@ -131,56 +131,59 @@ export function WishlistGrid() {
               <button onClick={() => handleOpenDialog(product)}>
                 <Eye className="h-7 w-7 p-1" />
               </button>
-              <Heart className="h-7 w-7 p-1 fill-current" />
+              <Heart className="h-7 w-7 p-1 text-red-600 fill-red-600" />
             </div>
           </div>
           <CardContent className="p-4 pb-0">
-            <h3 className="font-medium text-gray-900 mb-1">{product.name}</h3>
-            <div className="flex items-center mb-4">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-4 h-4 ${
-                    i < product.rating
-                      ? "fill-yellow-400 text-yellow-400"
-                      : "fill-gray-200 text-gray-200"
-                  }`}
-                />
-              ))}
-              <span className="text-xs text-gray-500 ml-1">
-                ({product.reviewCount})
-              </span>
-            </div>
-            <p className="font-semibold text-gray-900">{product.price}</p>
-            <p
-              className={`text-sm ${
-                product.inStock ? "text-green-600" : "text-red-500"
-              }`}
-            >
-              {product.inStock ? "In Stock" : "Out of Stock"}
-            </p>
-          </CardContent>
-          <CardFooter className="p-4">
-            {product.inStock === true ? (
-              <div className="items-end">
-                <div className="flex flex-col gap-2 justify-items-end items-center">
-                  <Button className="hover:bg-pink-600 bg-white cursor-pointer border-1 border-pink-200 hover:border-pink-600 border-solid hover:text-white text-pink-600">
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <p>2</p>
-                  <WishlistButton product={product} />
+            <div className="flex flex-row justify-between h-full">
+              <div>
+                <h3 className="font-medium text-gray-900 mb-1">
+                  {product.name}
+                </h3>
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-4 h-4 ${
+                        i < product.rating
+                          ? "fill-yellow-400 text-yellow-400"
+                          : "fill-gray-200 text-gray-200"
+                      }`}
+                    />
+                  ))}
+                  <span className="text-xs text-gray-500 ml-1">
+                    ({product.reviewCount})
+                  </span>
                 </div>
+                <p className="font-semibold text-gray-900">{product.price}</p>
+                <p
+                  className={`text-sm ${
+                    product.inStock ? "text-green-600" : "text-red-500"
+                  }`}
+                >
+                  {product.inStock ? "In Stock" : "Out of Stock"}
+                </p>
               </div>
-            ) : (
-              <Button
-                className="w-full cursor-not-allowed "
-                disabled={!product.inStock}
-              >
-                <ShoppingCart className="h-4 w-4 mr-2" />
-                Add to Cart
-              </Button>
-            )}
-          </CardFooter>
+              <div>
+                {product.inStock === true && product.id === product.id ? (
+                  <div className="items-end">
+                    <div className="flex flex-col gap-2 justify-items-end items-center">
+                      <Button
+                        size="iconSm"
+                        className="hover:bg-pink-600 bg-white cursor-pointer border-1 border-pink-200 hover:border-pink-600 border-solid hover:text-white text-pink-600"
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <p>2</p>
+                      <WishlistButton product={product} />
+                    </div>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          </CardContent>
         </Card>
       ))}
       <Dialog open={open} onOpenChange={setOpen}>

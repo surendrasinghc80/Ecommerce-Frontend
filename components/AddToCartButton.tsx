@@ -69,6 +69,7 @@ export function WishlistButton({ product }: { product: any }) {
     <Button
       className="hover:bg-pink-600 bg-white cursor-pointer border-1 border-pink-200 hover:border-pink-600 border-solid hover:text-white text-pink-600"
       onClick={handleAdd}
+      size={"iconSm"}
     >
       <Plus className="h-5 w-5" />
     </Button>

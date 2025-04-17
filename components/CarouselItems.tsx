@@ -24,6 +24,7 @@ import {
 } from "@/components/AddToCartButton";
 import axios from "axios";
 import { useCart } from "@/context/CartContext";
+import { Button } from "./ui/button";
 
 interface Product {
   id: string;
@@ -45,8 +46,7 @@ function CarouselItems() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const { incrementQuantity, decrementQuantity, cart, removeFromCart, total } =
-    useCart();
+  const { incrementQuantity, decrementQuantity, cart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 

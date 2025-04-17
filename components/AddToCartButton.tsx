@@ -15,6 +15,7 @@ export function AddToCartButton({ product }: { product: any }) {
       size: product.size, //newly added
       color: product.color, //newly added
       description: product.description, //newly added
+      priceOverride: product.priceOverride, //newly added
       basePrice: product.basePrice,
       imageUrl: product.images?.[0]?.imageUrl || "/placeholder.svg",
     };

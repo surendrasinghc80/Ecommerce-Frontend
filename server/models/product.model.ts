@@ -8,6 +8,8 @@ export interface ProductAttributes {
   brandName: string;
   gender: string;
   basePrice: number;
+  rating: number;
+  reviewCount: number;
 }
 
 export interface ProductCreationAttributes
@@ -23,6 +25,8 @@ class Product
   public brandName!: string;
   public gender!: string;
   public basePrice!: number;
+  public rating!: number;
+  public reviewCount!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -55,6 +59,14 @@ Product.init(
     basePrice: {
       type: DataTypes.FLOAT,
       allowNull: false,
+    },
+    rating: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    reviewCount: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {

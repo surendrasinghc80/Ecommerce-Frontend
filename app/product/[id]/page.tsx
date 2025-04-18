@@ -1,5 +1,9 @@
 "use client";
+<<<<<<< HEAD
 
+=======
+import { useEffect, useState } from "react";
+>>>>>>> 29d0bab161baed1c0326d0c5603a279af6635664
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";

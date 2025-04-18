@@ -24,7 +24,7 @@ export interface CartItem {
 export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { cart, removeFromCart, total, incrementQuantity, decrementQuantity } =
     useCart();
-  console.log("====Cart======", cart);
+  // console.log("====Cart======", cart);
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";

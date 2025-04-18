@@ -2,6 +2,8 @@
 import { useCart } from "@/context/CartContext";
 import { Button } from "./ui/button";
 import { Plus, ShoppingBag } from "lucide-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Default style button
 export function AddToCartButton({ product }: { product: any }) {
@@ -48,14 +50,16 @@ export function AddToCartFilledButton({
 
   const handleAdd = () => {
     const cartItem = {
-      id: product,
+      id: product.id,
       name: product.name,
       basePrice: product.basePrice,
       size: selectedSize,
       color: selectedColor,
       imageUrl: product.images?.[0]?.imageUrl || "/placeholder.svg",
     };
+
     addToCart(cartItem);
+    toast.success("Product added to cart!");
   };
 
   return (

@@ -181,19 +181,25 @@ function CarouselItems() {
               ₹ {Number(product.basePrice).toFixed(2)}
             </p>
 
-            {cart.find((item: any) => item.id === product.id) ? (
+            {cart.find(
+              (item: { id: string | number }) => item.id === product.id
+            ) ? (
               <div className="flex items-center justify-around gap-2 w-full">
                 <button
-                  onClick={() => handleDecrement(product.id)}
+                  onClick={() => handleDecrement(product)}
                   className="p-1 border rounded-md hover:bg-gray-100"
                 >
                   <Minus className="h-3 w-3" />
                 </button>
                 <span className="w-6 text-center">
-                  {cart.find((item: any) => item.id === product.id)?.quantity}
+                  {
+                    cart.find(
+                      (item: { id: string | number }) => item.id === product.id
+                    )?.quantity
+                  }
                 </span>
                 <button
-                  onClick={() => handleIncrement(product.id)}
+                  onClick={() => handleIncrement(product)}
                   className="p-1 border rounded-md hover:bg-gray-100"
                 >
                   <Plus className="h-3 w-3" />

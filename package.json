@@ -38,6 +38,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
     "react-responsive-carousel": "^3.2.23",
+    "react-toastify": "^11.0.5",
     "sequelize": "^6.37.7",
     "sequelize-typescript": "^2.1.6",
     "swiper": "^11.2.6",

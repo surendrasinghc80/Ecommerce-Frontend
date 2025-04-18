@@ -38,7 +38,6 @@ export default function ProductActions({
   product,
   selectedColor,
   selectedSize,
-  selectedImage,
   setSelectedColor,
   setSelectedSize,
   setSelectedImage,

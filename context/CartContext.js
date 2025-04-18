@@ -12,22 +12,32 @@ export const CartProvider = ({ children }) => {
     return [];
   });
 
-  const addToCart = (product) => {
+  const addToCart = (product, selectedColor, selectedSize) => {
     const formattedProduct = {
       ...product,
+      selectedColor,
+      selectedSize,
       imageUrl:
         product.imageUrl || product.images?.[0]?.url || "/placeholder.svg",
     };
 
     setCart((prevCart) => {
       const existingProduct = prevCart.find(
-        (p) => p.id === formattedProduct.id
+        (p) =>
+          p.id === formattedProduct.id &&
+          p.selectedColor === selectedColor &&
+          p.selectedSize === selectedSize
       );
+
       let updatedCart;
 
       if (existingProduct) {
         updatedCart = prevCart.map((p) =>
-          p.id === formattedProduct.id ? { ...p, quantity: p.quantity + 1 } : p
+          p.id === formattedProduct.id &&
+          p.selectedColor === selectedColor &&
+          p.selectedSize === selectedSize
+            ? { ...p, quantity: p.quantity + 1 }
+            : p
         );
       } else {
         updatedCart = [...prevCart, { ...formattedProduct, quantity: 1 }];
@@ -37,25 +47,29 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const incrementQuantity = (productId) => {
+  const incrementQuantity = (product) => {
     setCart((prevCart) =>
-      prevCart.map((product) =>
-        product.id === productId
-          ? { ...product, quantity: product.quantity + 1 }
-          : product
+      prevCart.map((p) =>
+        p.id === product.id &&
+        p.selectedColor === product.selectedColor &&
+        p.selectedSize === product.selectedSize
+          ? { ...p, quantity: p.quantity + 1 }
+          : p
       )
     );
   };
 
-  const decrementQuantity = (productId) => {
+  const decrementQuantity = (product) => {
     setCart((prevCart) =>
       prevCart
-        .map((product) =>
-          product.id === productId
-            ? { ...product, quantity: product.quantity - 1 }
-            : product
+        .map((p) =>
+          p.id === product.id &&
+          p.selectedColor === product.selectedColor &&
+          p.selectedSize === product.selectedSize
+            ? { ...p, quantity: p.quantity - 1 }
+            : p
         )
-        .filter((product) => product.quantity > 0)
+        .filter((p) => p.quantity > 0)
     );
   };
 

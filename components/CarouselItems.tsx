@@ -36,7 +36,7 @@ interface Product {
   brandName?: string;
   rating?: number;
   reviewCount?: number;
-  images: { imageUrl: string }[];
+  images: { imageUrl: string; color?: string }[];
   variants: {
     color: string;
     size: string;
@@ -75,7 +75,9 @@ function CarouselItems() {
     const defaultColor = product.variants?.[0]?.color || null;
     const defaultImage =
       product.images?.find((img: any) => img.color === defaultColor)
-        ?.imageUrl || null;
+        ?.imageUrl ||
+      product.images?.[0]?.imageUrl ||
+      "/placeholder.svg";
 
     setSelectedProduct(product);
     setSelectedColor(defaultColor);
@@ -110,6 +112,16 @@ function CarouselItems() {
     const wrappedProducts = products.slice(0, neededProducts);
     visibleProducts.push(...wrappedProducts);
   }
+
+  // Function to handle increment for a product by ID
+  const handleIncrement = (productId: string) => {
+    incrementQuantity(productId);
+  };
+
+  // Function to handle decrement for a product by ID
+  const handleDecrement = (productId: string) => {
+    decrementQuantity(productId);
+  };
 
   return (
     <div className="w-2/3 mx-auto py-8 relative">
@@ -169,26 +181,19 @@ function CarouselItems() {
               ₹ {Number(product.basePrice).toFixed(2)}
             </p>
 
-            {cart.find(
-              (item: { id: string | number }) => item.id === product.id
-            ) ? (
+            {cart.find((item: any) => item.id === product.id) ? (
               <div className="flex items-center justify-around gap-2 w-full">
                 <button
-                  onClick={() => decrementQuantity(product.id)}
+                  onClick={() => handleDecrement(product.id)}
                   className="p-1 border rounded-md hover:bg-gray-100"
                 >
                   <Minus className="h-3 w-3" />
                 </button>
                 <span className="w-6 text-center">
-                  {
-                    cart.find(
-                      (item: { id: string | number; quantity: number }) =>
-                        item.id === product.id
-                    )?.quantity
-                  }
+                  {cart.find((item: any) => item.id === product.id)?.quantity}
                 </span>
                 <button
-                  onClick={() => incrementQuantity(product.id)}
+                  onClick={() => handleIncrement(product.id)}
                   className="p-1 border rounded-md hover:bg-gray-100"
                 >
                   <Plus className="h-3 w-3" />
@@ -223,10 +228,11 @@ function CarouselItems() {
                   </div>
                   <div className="flex gap-2">
                     {selectedProduct.images
-                      ?.filter((img: any) => img.color === selectedColor) // Filter by selected color
+                      ?.filter((img) => img.color === selectedColor)
                       .map((img, index) => (
                         <div
                           key={index}
+                          onClick={() => setSelectedImage(img.imageUrl)}
                           className="rounded-lg border bg-gray-100 p-1 border-red-400 cursor-pointer"
                         >
                           <Image
@@ -246,7 +252,7 @@ function CarouselItems() {
                       {selectedProduct.name}
                     </h3>
                     <div className="flex m-5 ml-0">
-                      <p className="text-gray-600">Band:</p>{" "}
+                      <p className="text-gray-600">Brand:</p>
                       <span className="text-md text-black pl-2">
                         {selectedProduct.brandName}
                       </span>
@@ -281,7 +287,7 @@ function CarouselItems() {
                         new Set(selectedProduct.variants.map((v) => v.color))
                       ).map((color) => {
                         const colorImage = selectedProduct.images.find(
-                          (img: any) => img.color === color
+                          (img) => img.color === color
                         );
 
                         return (
@@ -356,10 +362,14 @@ function CarouselItems() {
                   <div className="flex items-center justify-between mt-4">
                     <div className="flex text-sm flex-col">
                       <span className="text-gray-600 pr-2">Sold By:</span>
-                      <p className=" text-black">Mobile Store</p>
+                      <p className="text-black">Mobile Store</p>
                     </div>
                     <div>
-                      <AddToCartFilledButton product={selectedProduct} />
+                      <AddToCartFilledButton
+                        product={selectedProduct}
+                        selectedColor={selectedColor}
+                        selectedSize={selectedSize}
+                      />
                     </div>
                   </div>
                 </div>

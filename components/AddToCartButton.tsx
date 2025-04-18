@@ -35,14 +35,24 @@ export function AddToCartButton({ product }: { product: any }) {
 }
 
 // Alternate filled-style button
-export function AddToCartFilledButton({ product }: { product: any }) {
+export function AddToCartFilledButton({
+  product,
+  selectedColor,
+  selectedSize,
+}: {
+  product: any;
+  selectedColor: string | null;
+  selectedSize: string | null;
+}) {
   const { addToCart } = useCart();
 
   const handleAdd = () => {
     const cartItem = {
-      id: product.id,
+      id: product,
       name: product.name,
       basePrice: product.basePrice,
+      size: selectedSize,
+      color: selectedColor,
       imageUrl: product.images?.[0]?.imageUrl || "/placeholder.svg",
     };
     addToCart(cartItem);

@@ -17,11 +17,14 @@ export interface CartItem {
   basePrice: number;
   imageUrl: string;
   quantity: number;
+  size: number;
+  color: string;
 }
 
 export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { cart, removeFromCart, total, incrementQuantity, decrementQuantity } =
     useCart();
+  console.log("====Cart======", cart);
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -85,13 +88,30 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                     <div className="flex justify-between">
                       <h3 className="font-medium text-sm">{product.name}</h3>
                       <button
-                        onClick={() => removeFromCart(product.id)}
+                        onClick={() => removeFromCart(product)}
                         className="text-gray-400 hover:text-gray-600"
                       >
                         <X className="h-4 w-4" />
                       </button>
                     </div>
-                    <p className="text-xs text-gray-500 mt-1">size</p>
+                    <div className="flex flex-row ">
+                      <div className="flex pr-5">
+                        <p className="text-xs text-gray-500 mt-1 mr-2">
+                          size:{" "}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {product.size}
+                        </p>
+                      </div>
+                      <div className="flex">
+                        <p className="text-xs text-gray-500 mt-1 mr-2">
+                          color:{" "}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {product.color}
+                        </p>
+                      </div>
+                    </div>
                     <div className="flex justify-between items-center mt-2">
                       <p className="font-medium text-rose-500">
                         ₹ {product.basePrice}
@@ -100,7 +120,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       {/* Quantity Controls */}
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => decrementQuantity(product.id)}
+                          onClick={() => decrementQuantity(product)}
                           className="p-1 border rounded-md hover:bg-gray-100"
                         >
                           <Minus className="h-3 w-3" />
@@ -109,7 +129,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                           {product.quantity}
                         </span>
                         <button
-                          onClick={() => incrementQuantity(product.id)}
+                          onClick={() => incrementQuantity(product)}
                           className="p-1 border rounded-md hover:bg-gray-100"
                         >
                           <Plus className="h-3 w-3" />

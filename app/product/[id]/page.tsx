@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
@@ -6,11 +8,19 @@ import ProductActions from "@/components/product-view/ProductActions";
 interface Product {
   id: string;
   name: string;
+  basePrice: number;
   description?: string;
   gender?: string;
   brandName?: string;
-  basePrice: number;
-  images: { imageUrl: string }[];
+  rating?: number;
+  reviewCount?: number;
+  images: { imageUrl: string; color: string }[];
+  variants: {
+    color: string;
+    size: string;
+    stock: number;
+    priceOverride: string;
+  }[];
 }
 
 async function getProduct(id: string): Promise<Product | null> {

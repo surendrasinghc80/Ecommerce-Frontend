@@ -1,4 +1,5 @@
 "use client";
+
 import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext();
@@ -73,9 +74,16 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = (product) => {
     setCart((prevCart) =>
-      prevCart.filter((product) => product.id !== productId)
+      prevCart.filter(
+        (p) =>
+          !(
+            p.id === product.id &&
+            p.selectedColor === product.selectedColor &&
+            p.selectedSize === product.selectedSize
+          )
+      )
     );
   };
 

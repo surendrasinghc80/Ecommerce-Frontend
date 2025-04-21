@@ -31,7 +31,8 @@
     "server/models/user.js",
     "server/server.js",
     "app/lib/auth.js",
-    "context/CartContext.js"
+    "context/CartContext.js",
+    "components/view-cart/Stepper.jsx"
   ],
   "exclude": ["node_modules"]
 }

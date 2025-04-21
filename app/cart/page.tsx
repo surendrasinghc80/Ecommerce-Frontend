@@ -5,11 +5,17 @@ import CartView from "@/components/view-cart/steps/CartView";
 import Details from "@/components/view-cart/steps/Details";
 import Payment from "@/components/view-cart/steps/Payment";
 import Review from "@/components/view-cart/steps/Review";
-
+import { StepperContext } from "@/context/StepperContext";
 import React, { useState } from "react";
+
+interface direction {
+  direction: string;
+}
 
 function Cart() {
   const [currentStep, SetCurrentStep] = useState(1);
+  const [userData, setUserData] = useState("");
+  const [finalData, setFinalData] = useState([]);
 
   const steps = ["Cart", "Details", "Payment", "Review"];
 
@@ -27,21 +33,37 @@ function Cart() {
         return <CartView />;
     }
   };
+
+  const handleClick = (direction: "next" | "back") => {
+    let newStep = currentStep;
+
+    direction === "next" ? (newStep += 1) : (newStep -= 1);
+    newStep > 0 && newStep <= steps.length && SetCurrentStep(newStep);
+  };
+
   return (
-    <div className="flex flex-row w-2/3 mx-auto my-8 relative bg-gray-100">
-      <div className="basis-[70%] bg-blue-400">
-        {/*Stepper*/}
+    <div className="flex justify-center min-h-screen bg-gray-100 w-2/3 mx-auto my-8 relative">
+      <div className="basis-[100%]">
+        {/* Stepper */}
         <div className="container horizontal mt-5">
           <Stepper steps={steps} currentStep={currentStep} />
         </div>
+        <div className="p-10">
+          <StepperContext.Provider
+            value={{ userData, setUserData, finalData, setFinalData }}
+          >
+            {displaySteps(currentStep)}
+          </StepperContext.Provider>
+        </div>
         <div className="flex">
-          {/*StepperControl*/}
-          <StepperControl />
+          <StepperControl
+            steps={steps}
+            handleClick={handleClick}
+            currentStep={currentStep}
+          />
         </div>
       </div>
-      <div className="basis-[30%] bg-rose-300">
-        This is the Right side of the cart view
-      </div>
+      {/* Optional Right Side */}
     </div>
   );
 }

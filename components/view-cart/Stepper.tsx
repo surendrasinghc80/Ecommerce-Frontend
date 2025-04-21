@@ -59,27 +59,34 @@ function Stepper({
   }, [steps, currentStep]);
 
   return (
-    <div className="mx-4 p-4 flex justify-between items-center">
-      {newStep.map((step, index) => (
-        <div key={index} className="w-full flex items-center">
-          <div>
-            <div className="relative flex items-center justify-between mb-4">
-              <Badge
-                className={`p-1.5 rounded-xl cursor-pointer ${
-                  step.completed
-                    ? "bg-[rgba(102,239,68,0.2)] text-green-500"
-                    : "bg-gray-200 text-gray-500"
-                }`}
-              >
-                {index + 1}. {step.description}
-              </Badge>
+    <div className="flex-row mx-4 pl-10 p-4 flex justify-between items-center">
+      <div className=" flex basis-[70%]">
+        {newStep.map((step, index) => (
+          <div key={index} className="w-full flex items-center">
+            <div>
+              <div className="relative flex items-center justify-between mb-4">
+                <Badge
+                  className={`p-2 rounded-4xl cursor-pointer ${
+                    step.completed
+                      ? "bg-rose-400 text-gray-100 text-md"
+                      : "bg-gray-300 text-gray-500 text-md"
+                  }`}
+                >
+                  {index + 1}. {step.description}
+                </Badge>
+              </div>
             </div>
+            {index !== newStep.length - 1 && (
+              <div
+                className={`flex-auto border-t-4 mb-4 transition duration-500 ease-in-out border-gray-300 ${
+                  step.completed ? "border-rose-400" : "border-rose-200"
+                }`}
+              />
+            )}
           </div>
-          {index !== newStep.length - 1 && (
-            <div className="flex-auto border-t-4 mb-4 transition duration-500 ease-in-out border-gray-300" />
-          )}
-        </div>
-      ))}
+        ))}
+      </div>
+      <div className=" flex basis-[30%]"></div>
     </div>
   );
 }

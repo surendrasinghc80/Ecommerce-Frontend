@@ -5,6 +5,7 @@ import { X, Plus, Minus, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import Link from "next/link";
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -150,13 +151,18 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             >
               Checkout Now (₹{total})
             </Button>
-            <Button
-              variant="outline"
-              className="w-full border-gray-300"
-              size="lg"
+            <Link
+              href="/cart"
+              className="w-full text-center text-gray-500 hover:text-gray-700"
             >
-              View Cart
-            </Button>
+              <Button
+                variant="outline"
+                className="w-full border-gray-300"
+                size="lg"
+              >
+                View Cart
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

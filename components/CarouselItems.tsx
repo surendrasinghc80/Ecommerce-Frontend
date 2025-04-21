@@ -212,7 +212,7 @@ function CarouselItems() {
         ))}
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-[600px] text-pink-600">
+        <DialogContent className="sm:max-w-[700px] sm:max-h-[800px] text-pink-600">
           {selectedProduct && (
             <>
               <DialogHeader />
@@ -239,7 +239,7 @@ function CarouselItems() {
                         <div
                           key={index}
                           onClick={() => setSelectedImage(img.imageUrl)}
-                          className="rounded-lg border bg-gray-100 p-1 border-red-400 cursor-pointer"
+                          className="rounded-lg border bg-gray-100 p-1 mt-12 border-red-400 cursor-pointer"
                         >
                           <Image
                             src={img.imageUrl}

@@ -80,6 +80,14 @@ function Details() {
                 Billing Address same as above.
               </label>
             </div>
+            <div>
+              <Button
+                variant={"outline"}
+                className="w-full border-rose-400 hover:bg-rose-500 hover:text-gray-100 text-rose-400 rounded-sm"
+              >
+                Save Address
+              </Button>
+            </div>
           </div>
         </div>
       </div>

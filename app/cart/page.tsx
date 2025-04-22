@@ -17,7 +17,7 @@ function Cart() {
   const [userData, setUserData] = useState("");
   const [finalData, setFinalData] = useState([]);
 
-  const steps = ["Cart", "Details", "Payment", "Review"];
+  const steps = ["Cart", "Details", "Review", "Payment"];
 
   const displaySteps = (step: any) => {
     switch (step) {

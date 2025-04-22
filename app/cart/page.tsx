@@ -4,7 +4,6 @@ import StepperControl from "@/components/view-cart/StepperControl";
 import CartView from "@/components/view-cart/steps/CartView";
 import Details from "@/components/view-cart/steps/Details";
 import Payment from "@/components/view-cart/steps/Payment";
-import Review from "@/components/view-cart/steps/Review";
 import { StepperContext } from "@/context/StepperContext";
 import React, { useState } from "react";
 
@@ -17,7 +16,7 @@ function Cart() {
   const [userData, setUserData] = useState("");
   const [finalData, setFinalData] = useState([]);
 
-  const steps = ["Cart", "Details", "Review", "Payment"];
+  const steps = ["Cart", "Details", "Payment"];
 
   const displaySteps = (step: any) => {
     switch (step) {
@@ -26,8 +25,6 @@ function Cart() {
       case 2:
         return <Details />;
       case 3:
-        return <Review />;
-      case 4:
         return <Payment />;
       default:
         return <CartView />;

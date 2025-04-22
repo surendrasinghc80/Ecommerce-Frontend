@@ -13,16 +13,14 @@ import {
 } from "@/components/ui/select";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 function Details() {
-  const { cart, removeFromCart, total, incrementQuantity, decrementQuantity } =
-    useCart();
+  const { total } = useCart();
   return (
     <div className="flex flex-row justify-between p-4">
       <div className="basis-[70%] bg-white shadow-md mr-5 rounded-md p-5">
         <div>
           <p className="font-semibold">Shipping Address</p>
-          <div className="grid grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-2 gap-4 mt-4 text-gray-500">
             <div>
               <Label className="text-sm font-semibold">Full Name</Label>
               <Input className="p-2 text-lg rounded-sm" />
@@ -95,19 +93,19 @@ function Details() {
         <div className="border-b">
           <p className="font-semibold">Order Summary</p>
           <div className="flex flex-col mt-4">
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between text-gray-600 items-center mb-2">
               <p className="text-sm font-semibold">Subtotal</p>
               <p className="text-sm font-semibold">₹{total}</p>
             </div>
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between text-gray-600 items-center mb-2">
               <p className="text-sm font-semibold">Shipping</p>
               <p className="text-sm font-semibold">-</p>
             </div>
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between  text-gray-600 items-center mb-2">
               <p className="text-sm font-semibold">Tax</p>
               <p className="text-sm font-semibold">₹150.00</p>
             </div>
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between  text-gray-600 items-center mb-2">
               <p className="text-sm font-semibold">Discount</p>
               <p className="text-sm font-semibold">-</p>
             </div>

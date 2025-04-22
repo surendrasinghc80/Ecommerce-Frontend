@@ -45,7 +45,7 @@ function Cart() {
         <div className="container horizontal mt-5">
           <Stepper steps={steps} currentStep={currentStep} />
         </div>
-        <div className="p-10">
+        <div className="p-5">
           <StepperContext.Provider
             value={{ userData, setUserData, finalData, setFinalData }}
           >

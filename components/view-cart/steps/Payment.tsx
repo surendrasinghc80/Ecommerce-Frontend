@@ -26,7 +26,8 @@ function Payment() {
     new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
-      maximumFractionDigits: 0,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     }).format(price);
 
   return (
@@ -39,7 +40,11 @@ function Payment() {
           <div className="pt-4 border-1 p-4 bg-white rounded-md shadow-md">
             <RadioGroup defaultValue="comfortable">
               <div className="flex items-center space-x-2 pb-2 border-b">
-                <RadioGroupItem value="compact" id="r1" />
+                <RadioGroupItem
+                  className="cursor-pointer"
+                  value="compact"
+                  id="r1"
+                />
                 <div>
                   <Label htmlFor="r3" className="font-semibold font-md pb-2">
                     Surendra Singh
@@ -50,7 +55,11 @@ function Payment() {
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="Address" id="r2" />
+                <RadioGroupItem
+                  className="cursor-pointer"
+                  value="Address"
+                  id="r2"
+                />
                 <div>
                   <Label htmlFor="r3" className="font-semibold font-md pb-2">
                     Aman Sharma
@@ -69,7 +78,11 @@ function Payment() {
           <div className="pt-4 border-1 p-4 bg-white rounded-md shadow-md">
             <RadioGroup defaultValue="comfortable">
               <div className="flex items-center space-x-2 pb-2">
-                <RadioGroupItem value="compact" id="r1" />
+                <RadioGroupItem
+                  className="cursor-pointer"
+                  value="compact"
+                  id="r1"
+                />
                 <div className="flex items-center justify-center space-x-2">
                   <Image
                     src={"/images/Mastercard-Logo.png"}
@@ -120,7 +133,11 @@ function Payment() {
                 </div>
               </div>
               <div className="flex items-center space-x-2 pb-2">
-                <RadioGroupItem value="google-pay" id="r2" />
+                <RadioGroupItem
+                  className="cursor-pointer"
+                  value="google-pay"
+                  id="r2"
+                />
                 <div className="flex items-center justify-center space-x-2">
                   <Image
                     src={"/images/Google-pay-logo.png"}
@@ -252,13 +269,13 @@ function Payment() {
                 <p>Delivery Charges</p>
                 <p className="text-green-500">Free Delivery</p>
               </div>
-              <div className="flex justify-between font-semibold text-sm text-gray-800 mt-2">
+              <div className="flex justify-between font-semibold text-sm text-gray-800 mt-2 pt-2">
                 <p>Total Amount</p>
                 <p>{formatPrice(total)}</p>
               </div>
             </div>
             <div className="pt-2 pb-8">
-              <Button className="w-full">
+              <Button className="w-full hover:bg-green-500 hover:text-gray-10 rounded-sm border-green-500 cursor-pointer transition duration-400">
                 Proceed to pay
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>

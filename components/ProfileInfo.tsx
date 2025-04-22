@@ -31,7 +31,7 @@ export function ProfileInfo() {
               <Button
                 size="icon"
                 variant="outline"
-                className="absolute bottom-0 right-0 h-6 w-6 rounded-full border-2 border-white"
+                className="absolute bottom-0 right-0 h-6 w-6 rounded-full border-2 border-white cursor-pointer transition duration-400"
               >
                 <Camera className="h-3 w-3" />
                 <span className="sr-only">Upload new picture</span>

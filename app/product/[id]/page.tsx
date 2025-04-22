@@ -77,7 +77,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               width={100}
               height={100}
               onClick={() => setSelectedImage(img.imageUrl)}
-              className="cursor-pointer rounded-md border border-gray-200 hover:border-black transition-all"
+              className="cursor-pointer rounded-md border-gray-200 hover:border-stone-600 transition-all border-1 m-2"
             />
           ))}
         </div>
@@ -90,7 +90,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           alt={`${product.name} - selected`}
           width={550}
           height={550}
-          className="object-contain rounded-lg shadow-lg"
+          className="object-contain rounded-lg shadow-lg border-1"
         />
       </div>
 

@@ -180,7 +180,7 @@ export function WishlistGrid() {
                       <Button
                         onClick={() => decrementQuantity(product.id)}
                         size="iconSm"
-                        className="hover:bg-pink-600 bg-white cursor-pointer border-1 border-pink-200 hover:border-pink-600 border-solid hover:text-white text-pink-600"
+                        className="hover:bg-pink-600 bg-white border-1 border-pink-200 hover:border-pink-600 border-solid hover:text-white text-pink-600 cursor-pointer transition duration-400"
                       >
                         <Minus className="h-4 w-4" />
                       </Button>

@@ -44,6 +44,14 @@ export default function ProductActions({
 }: Props) {
   const { cart, incrementQuantity, decrementQuantity } = useCart();
 
+  const formatPrice = (price: number) =>
+    new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price);
+
   // Selected variant for pricing, stock, etc.
   const selectedVariant = useMemo(() => {
     return product.variants.find(
@@ -76,10 +84,11 @@ export default function ProductActions({
       <p className="text-gray-500">{product.description}</p>
 
       <h2 className="text-2xl text-pink-500 font-bold">
-        ₹{" "}
-        {selectedVariant
-          ? Number(selectedVariant.priceOverride).toFixed(2)
-          : Number(product.basePrice).toFixed(2)}
+        {formatPrice(
+          selectedVariant
+            ? Number(selectedVariant.priceOverride)
+            : Number(product.basePrice)
+        )}
       </h2>
 
       <div className="flex items-center mb-2">

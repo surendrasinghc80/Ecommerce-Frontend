@@ -66,7 +66,7 @@ function Stepper({
             <div>
               <div className="relative flex items-center justify-between mb-4">
                 <Badge
-                  className={`p-2 rounded-4xl cursor-pointer ${
+                  className={`p-2 rounded-4xl cursor-default  ${
                     step.completed
                       ? "bg-rose-600 text-gray-100 text-md"
                       : "bg-gray-300 text-gray-500 text-md"

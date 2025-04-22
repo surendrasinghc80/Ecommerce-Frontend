@@ -47,7 +47,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`relative flex items-center justify-between w-full px-3 py-2.5 text-sm rounded-md ${
+                  className={`relative flex items-center justify-between w-full px-3 py-2.5 text-sm rounded-md cursor-pointer transition duration-400 ${
                     activeTab === item.id
                       ? "text-rose-500 font-medium"
                       : "text-gray-700 hover:bg-gray-50"

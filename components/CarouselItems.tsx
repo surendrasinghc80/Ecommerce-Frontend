@@ -123,6 +123,14 @@ function CarouselItems() {
     decrementQuantity(productId);
   };
 
+  const formatPrice = (price: number) =>
+    new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price);
+
   return (
     <div className="w-2/3 mx-auto py-8 relative">
       <div className="flex justify-between items-center mb-6">
@@ -178,7 +186,7 @@ function CarouselItems() {
 
             <h3 className="text-gray-700 text-center mb-2">{product.name}</h3>
             <p className="font-medium text-gray-900 mb-2">
-              ₹ {Number(product.basePrice).toFixed(2)}
+              {formatPrice(product.basePrice)}
             </p>
 
             {cart.find(
@@ -281,7 +289,7 @@ function CarouselItems() {
                       </span>
                     </div>
                     <p className="text-2xl text-pink-600 font-bold">
-                      ₹ {Number(selectedProduct.basePrice).toFixed(2)}
+                      {formatPrice(selectedProduct.basePrice)}
                     </p>
                   </div>
                   <div>

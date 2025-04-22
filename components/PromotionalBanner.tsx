@@ -55,7 +55,10 @@ function PromotionalBanner() {
 
           {/* Right section */}
           <div className="bg-zinc-700 py-4 px-6 w-full sm:w-1/6 flex justify-center">
-            <Button asChild className="bg-white text-black hover:bg-gray-100">
+            <Button
+              asChild
+              className="bg-white text-black hover:bg-gray-100 cursor-pointer transition duration-400"
+            >
               <Link href="/sale">Shop Now</Link>
             </Button>
           </div>

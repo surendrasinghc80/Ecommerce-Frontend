@@ -241,7 +241,7 @@ export default function Header() {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-red-400 mt-4 cursor-pointer "
+                        className="w-full bg-red-400 mt-4 cursor-pointer"
                       >
                         {isSubmitting ? "Logging..." : "Login"}
                       </Button>

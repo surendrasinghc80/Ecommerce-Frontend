@@ -214,7 +214,7 @@ function CategoryAndItems() {
 
               <Button
                 variant="outline"
-                className="w-full border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer"
+                className="w-full border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer transition duration-400"
               >
                 Add To Cart
               </Button>
@@ -275,7 +275,7 @@ function CategoryAndItems() {
                     </span>
                   </div>
                   <div className="space-y-3 m-5 ml-0 w-25">
-                    <Button className="w-full bg-pink-600 cursor-pointer text-white">
+                    <Button className="w-full bg-pink-600 cursor-pointer text-white transition duration-400">
                       Add To Cart
                     </Button>
                   </div>

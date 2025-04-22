@@ -16,7 +16,9 @@ function StepperControl({
       <Button
         onClick={() => handleClick("back")}
         variant="outline"
-        className={`mr-2 ${currentStep === 1 ? "hidden" : ""}`}
+        className={`ml-2 w-xl cursor-pointer border-rose-400 hover:bg-rose-500 hover:text-gray-100 text-rose-400 rounded-sm transition duration-400 ${
+          currentStep === 1 ? "hidden" : ""
+        }`}
       >
         Back
       </Button>
@@ -24,8 +26,8 @@ function StepperControl({
       <Button
         onClick={() => handleClick("next")}
         variant="outline"
-        className={`mr-2  ${
-          currentStep === steps.length - 1 ? "Confirm" : "Next"
+        className={`mr-2 w-xl cursor-pointer border-rose-400 hover:bg-rose-500 hover:text-gray-100 text-rose-400 rounded-sm transition duration-400  ${
+          currentStep === steps.length ? "hidden" : ""
         }`}
       >
         Next

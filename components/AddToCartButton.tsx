@@ -27,7 +27,7 @@ export function AddToCartButton({ product }: { product: any }) {
   return (
     <Button
       variant="outline"
-      className="w-full border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer transition duration-300"
+      className="w-full border-gray-300 hover:bg-black hover:text-gray-100 cursor-pointer transition duration-400 ease-in-out"
       onClick={handleAdd}
     >
       <ShoppingBag className="h-5 w-5 mr-2" />
@@ -64,8 +64,9 @@ export function AddToCartFilledButton({
 
   return (
     <Button
-      className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md mt-2"
+      className="hover:bg-rose-500 text-white px-4 py-2 rounded-md mt-2"
       onClick={handleAdd}
+      variant={"default"}
     >
       <ShoppingBag className="h-5 w-5 mr-2" />
       Add To Cart

@@ -37,7 +37,7 @@ function HeroSection() {
               Get Free Shipping on orders over $99.00
             </h1>
 
-            <Button className="mt-10 bg-red-400 hover:bg-red-500 text-white font-normal text-md py-2 px-4 rounded">
+            <Button className="mt-10 bg-red-400 hover:bg-red-500 text-white font-normal text-md py-2 px-4 rounded cursor-pointer transition duration-400">
               Shop Now
             </Button>
           </div>
@@ -62,7 +62,7 @@ function HeroSection() {
             </div>
             <Button
               variant="ghost"
-              className="mt-5 w-20 text-zinc-800 font-normal text-md py-2 px-4 rounded"
+              className="mt-5 w-20 text-zinc-800 font-normal text-md py-2 px-4 rounded cursor-pointer transition duration-400"
             >
               Shop Now
             </Button>
@@ -85,7 +85,7 @@ function HeroSection() {
             </div>
             <Button
               variant="ghost"
-              className="mt-5 w-20 text-zinc-800 font-normal text-md py-2 px-4 rounded"
+              className="mt-5 w-20 text-zinc-800 font-normal text-md py-2 px-4 rounded cursor-pointer transition duration-400"
             >
               Shop Now
             </Button>

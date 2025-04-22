@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
 import User from "@/server/models/User";
 
@@ -28,7 +29,7 @@ export async function POST(
     const { fullName, email, password, confirmPassword }: SignupRequestBody =
       await req.json();
 
-    if (!fullName || !email || !password) {
+    if (!fullName || !email || !password || !confirmPassword) {
       return NextResponse.json(
         { error: "All fields are required" },
         { status: 400 }
@@ -56,6 +57,27 @@ export async function POST(
       fullName,
       email,
       password: hashedPassword,
+    });
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_FROM,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false, // not recommended for production
+      },
+    });
+
+    await transporter.sendMail({
+      from: `Bonik Team <${process.env.EMAIL_FROM}>`,
+      to: email,
+      subject: "Welcome to Bonik",
+      html: `<h1>Welcome to Bonik, ${fullName}!</h1><p>Thank you for signing up. We are excited to have you on board.</p>`,
+      headers: {
+        "X-Mailer": "Bonik Mailer",
+      },
     });
 
     return NextResponse.json(

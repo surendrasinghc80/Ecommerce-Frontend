@@ -152,7 +152,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             </Button>
             {cart.length > 0 ? (
               <Link
-                href="/cart"
+                href="/checkout"
                 className="w-full text-center text-gray-500 hover:text-gray-700"
               >
                 <Button

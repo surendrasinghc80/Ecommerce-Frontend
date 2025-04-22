@@ -287,7 +287,7 @@ function Payment() {
                 <p>{formatPrice(total)}</p>
               </div>
             </div>
-            <div className="pt-2 pb-8">
+            <div className="pt-4 pb-4">
               <Button className="w-full font-poppins hover:bg-green-500 hover:text-gray-10 rounded-sm border-green-500 cursor-pointer transition duration-400">
                 Proceed to pay
                 <ArrowRight className="h-4 w-4 ml-2" />

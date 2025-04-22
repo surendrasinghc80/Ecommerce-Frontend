@@ -8,9 +8,9 @@ import Review from "@/components/view-cart/steps/Review";
 import { StepperContext } from "@/context/StepperContext";
 import React, { useState } from "react";
 
-interface direction {
-  direction: string;
-}
+// interface direction {
+//   direction: string;
+// }
 
 function Cart() {
   const [currentStep, SetCurrentStep] = useState(1);

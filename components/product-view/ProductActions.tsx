@@ -152,7 +152,7 @@ export default function ProductActions({
         <div className="flex items-center justify-around gap-2 w-full">
           <button
             onClick={() => decrementQuantity(product)}
-            className="p-1 border rounded-md hover:bg-gray-100"
+            className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
           >
             <Minus className="h-3 w-3" />
           </button>
@@ -166,7 +166,7 @@ export default function ProductActions({
           </span>
           <button
             onClick={() => incrementQuantity(product)}
-            className="p-1 border rounded-md hover:bg-gray-100"
+            className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
           >
             <Plus className="h-3 w-3" />
           </button>

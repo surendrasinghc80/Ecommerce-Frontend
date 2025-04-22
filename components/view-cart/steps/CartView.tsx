@@ -4,7 +4,7 @@ import { X, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
-import Link from "next/link";
+
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -36,13 +36,21 @@ export interface CartItem {
 function CartView() {
   const { cart, removeFromCart, total, incrementQuantity, decrementQuantity } =
     useCart();
+
+  const formatPrice = (price: number) =>
+    new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price);
   return (
     <div className="flex flex-row h-full w-full basis-[70%]">
       <div className="flex-1 overflow-y-auto py-2">
         {cart.map((product: CartItem) => (
           <div
             key={product.id}
-            className="p-4 bg-white rounded-md mb-5 border-b"
+            className="p-4 bg-white rounded-md mb-5 border-1 shadow-md"
           >
             <div className="flex gap-4">
               {/* Product Image */}
@@ -62,7 +70,7 @@ function CartView() {
                   <h3 className="font-medium text-sm">{product.name}</h3>
                   <button
                     onClick={() => removeFromCart(product)}
-                    className="text-gray-400 hover:text-gray-600"
+                    className="text-gray-400 hover:text-gray-600 cursor-pointer"
                   >
                     <X className="h-4 w-4" />
                   </button>
@@ -81,21 +89,21 @@ function CartView() {
                 </div>
                 <div className="flex justify-between items-center mt-2">
                   <p className="font-medium text-rose-500">
-                    ₹ {product.basePrice}
+                    {formatPrice(product.basePrice)}
                   </p>
 
                   {/* Quantity Controls */}
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => decrementQuantity(product)}
-                      className="p-1 border rounded-md hover:bg-gray-100"
+                      className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
                     >
                       <Minus className="h-3 w-3" />
                     </button>
                     <span className="w-6 text-center">{product.quantity}</span>
                     <button
                       onClick={() => incrementQuantity(product)}
-                      className="p-1 border rounded-md hover:bg-gray-100"
+                      className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
                     >
                       <Plus className="h-3 w-3" />
                     </button>
@@ -106,10 +114,13 @@ function CartView() {
           </div>
         ))}
       </div>
-      <div className="basis-[30%] bg-white p-4 ml-5 mt-2 rounded-md border-l">
-        <div className="flex justify-between pb-4 border-b">
+      <div className="basis-[30%] bg-white p-4 ml-5 mt-2 border-1 rounded-md shadow-md">
+        <div className="flex justify-between pb-4 border-b ">
           <p className="text-gray-500">Total:</p>
-          <p className="font-semibold text-lg text-gray-700"> ₹{total}</p>
+          <p className="font-semibold text-lg text-gray-700">
+            {" "}
+            {formatPrice(total)}
+          </p>
         </div>
         <div className="border-b">
           <div className="flex pt-4 items-center">

@@ -19,8 +19,7 @@ export interface CartItem {
 }
 
 function Payment() {
-  const { cart, removeFromCart, total, incrementQuantity, decrementQuantity } =
-    useCart();
+  const { cart, total, incrementQuantity, decrementQuantity } = useCart();
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("en-IN", {
@@ -31,7 +30,7 @@ function Payment() {
     }).format(price);
 
   return (
-    <div className="flex flex-row gap-4 p-4">
+    <div className="flex flex-row font-poppins gap-4 p-4">
       <div className="basis-[70%]">
         <div>
           <p className="font-semibold pb-2 text-lg">
@@ -100,26 +99,38 @@ function Payment() {
                   <Label className="text-sm text-gray-600 font-semibold">
                     Name
                   </Label>
-                  <Input className="p-2 text-lg rounded-sm" />
+                  <Input
+                    placeholder="SURENDRA SINGH"
+                    className="p-2 text-lg rounded-sm"
+                  />
                 </div>
                 <div className="pb-3">
                   <Label className="text-sm text-gray-600 font-semibold">
                     Card Number*
                   </Label>
-                  <Input className="p-2 text-lg rounded-sm" />
+                  <Input
+                    placeholder="4242 4242 4242 4242"
+                    className="p-2 text-lg rounded-sm"
+                  />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="pb-3">
                     <Label className="text-sm text-gray-600 font-semibold">
                       Expiry Date*
                     </Label>
-                    <Input className="p-2 text-lg rounded-sm" />
+                    <Input
+                      placeholder="MM/YY"
+                      className="p-2 text-lg rounded-sm"
+                    />
                   </div>
                   <div className="pb-3">
                     <Label className="text-sm text-gray-600 font-semibold">
                       CVV
                     </Label>
-                    <Input className="p-2 text-lg rounded-sm" />
+                    <Input
+                      placeholder="***"
+                      className="p-2 text-lg rounded-sm"
+                    />
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -222,7 +233,7 @@ function Payment() {
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => decrementQuantity(product)}
-                            className="p-1 border rounded-md hover:bg-gray-100"
+                            className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
                           >
                             <Minus className="h-3 w-3" />
                           </button>
@@ -231,7 +242,7 @@ function Payment() {
                           </span>
                           <button
                             onClick={() => incrementQuantity(product)}
-                            className="p-1 border rounded-md hover:bg-gray-100"
+                            className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
                           >
                             <Plus className="h-3 w-3" />
                           </button>
@@ -265,17 +276,19 @@ function Payment() {
                   </div>
                 ))}
               </div>
-              <div className="flex justify-between font-semibold text-sm text-gray-600 mt-2">
-                <p>Delivery Charges</p>
-                <p className="text-green-500">Free Delivery</p>
+              <div className="flex justify-between mt-2 border-b border-solid border-gray-400 pb-2">
+                <p className="font-semibold font-poppins text-sm text-gray-600">
+                  Delivery Charges
+                </p>
+                <p className="font-poppins text-green-500">Free Delivery</p>
               </div>
-              <div className="flex justify-between font-semibold text-sm text-gray-800 mt-2 pt-2">
+              <div className="flex justify-between font-semibold text-sm text-gray-800 mt-2">
                 <p>Total Amount</p>
                 <p>{formatPrice(total)}</p>
               </div>
             </div>
             <div className="pt-2 pb-8">
-              <Button className="w-full hover:bg-green-500 hover:text-gray-10 rounded-sm border-green-500 cursor-pointer transition duration-400">
+              <Button className="w-full font-poppins hover:bg-green-500 hover:text-gray-10 rounded-sm border-green-500 cursor-pointer transition duration-400">
                 Proceed to pay
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>

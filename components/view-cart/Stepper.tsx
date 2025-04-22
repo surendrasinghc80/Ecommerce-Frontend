@@ -68,7 +68,7 @@ function Stepper({
                 <Badge
                   className={`p-2 rounded-4xl cursor-default  ${
                     step.completed
-                      ? "bg-rose-600 text-gray-100 text-md"
+                      ? "bg-rose-500 text-gray-100 text-md"
                       : "bg-gray-300 text-gray-500 text-md"
                   }`}
                 >
@@ -79,7 +79,7 @@ function Stepper({
             {index !== newStep.length - 1 && (
               <div
                 className={`flex-auto border-t-4 mb-4 transition duration-500 ease-in-out border-gray-300 ${
-                  step.completed ? "border-rose-600" : "border-rose-300"
+                  step.completed ? "border-rose-500" : "border-rose-300"
                 }`}
               />
             )}

@@ -61,7 +61,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             </div>
             <button
               onClick={onClose}
-              className="p-1 rounded-full hover:bg-gray-100"
+              className="p-1 rounded-full hover:bg-gray-100 cursor-pointer"
             >
               <X className="h-5 w-5" />
             </button>
@@ -121,7 +121,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => decrementQuantity(product)}
-                          className="p-1 border rounded-md hover:bg-gray-100"
+                          className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
                         >
                           <Minus className="h-3 w-3" />
                         </button>
@@ -130,7 +130,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </span>
                         <button
                           onClick={() => incrementQuantity(product)}
-                          className="p-1 border rounded-md hover:bg-gray-100"
+                          className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
                         >
                           <Plus className="h-3 w-3" />
                         </button>

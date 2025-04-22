@@ -45,19 +45,20 @@ function Cart() {
         <div className="container horizontal mt-5">
           <Stepper steps={steps} currentStep={currentStep} />
         </div>
-        <div className="p-5">
-          <StepperContext.Provider
-            value={{ userData, setUserData, finalData, setFinalData }}
-          >
-            {displaySteps(currentStep)}
-          </StepperContext.Provider>
-        </div>
         <div className="flex">
           <StepperControl
             steps={steps}
             handleClick={handleClick}
             currentStep={currentStep}
           />
+        </div>
+
+        <div>
+          <StepperContext.Provider
+            value={{ userData, setUserData, finalData, setFinalData }}
+          >
+            {displaySteps(currentStep)}
+          </StepperContext.Provider>
         </div>
       </div>
       {/* Optional Right Side */}

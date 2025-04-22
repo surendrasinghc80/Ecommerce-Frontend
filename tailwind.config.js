@@ -5,8 +5,8 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ["var(--font-poppins)", ...fontFamily.sans],
-        geist: ["var(--font-geist-sans)", ...fontFamily.sans],
-        mono: ["var(--font-geist-mono)", ...fontFamily.mono],
+        // geist: ["var(--font-geist-sans)", ...fontFamily.sans],
+        // mono: ["var(--font-geist-mono)", ...fontFamily.mono],
       },
     },
   },

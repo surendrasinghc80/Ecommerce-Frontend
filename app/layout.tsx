@@ -39,7 +39,9 @@ export default function RootLayout({
         className={` ${poppins.variable} antialiased bg-gray-100 text-gray-900`}
       >
         <Providers>
-          <Header />
+          <div className="fixed top-0 w-full shadow-md z-50">
+            <Header />
+          </div>
           {children}
           <ToastContainer position="top-right" autoClose={3000} />
           <Footer />

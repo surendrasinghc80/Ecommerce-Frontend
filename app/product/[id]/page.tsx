@@ -65,7 +65,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   );
 
   return (
-    <div className="flex flex-row justify-center items-start w-full gap-4 p-10">
+    <div className="flex flex-row justify-center items-start mt-30 w-full gap-4 p-10">
       {/* Image Gallery */}
       <div className="flex flex-col gap-4 items-center">
         <div className=" fle gap-2">

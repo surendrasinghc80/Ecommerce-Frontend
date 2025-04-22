@@ -1,10 +1,8 @@
 import React from "react";
-import { useEffect } from "react";
 import { X, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
-
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -44,6 +42,7 @@ function CartView() {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(price);
+
   return (
     <div className="flex flex-row h-full w-full basis-[70%]">
       <div className="flex-1 overflow-y-auto py-2">

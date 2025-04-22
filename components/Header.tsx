@@ -38,7 +38,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import {
   Dialog,
@@ -71,6 +71,7 @@ export default function Header() {
   const { data: session, status } = useSession();
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false); // <-- Add mount state
 
   const {
     register,
@@ -106,6 +107,11 @@ export default function Header() {
       alert("Something went wrong");
     }
   };
+
+  // Track client-side mounting
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <header className="flex w-full justify-center bg-white shadow-lg">
@@ -319,7 +325,7 @@ export default function Header() {
             >
               <ShoppingBag className="h-10 w-10" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                {cart.length === 0 ? "0" : cart.length}
+                {isMounted ? cart.length || 0 : 0}
               </span>
             </Button>
             <CartSidebar

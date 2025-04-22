@@ -150,18 +150,22 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             >
               Checkout Now (₹{total})
             </Button>
-            <Link
-              href="/cart"
-              className="w-full text-center text-gray-500 hover:text-gray-700"
-            >
-              <Button
-                variant="outline"
-                className="w-full border-rose-500 hover:bg-rose-600 hover:text-gray-100 text-rose-400 rounded-sm"
-                size="lg"
+            {cart.length > 0 ? (
+              <Link
+                href="/cart"
+                className="w-full text-center text-gray-500 hover:text-gray-700"
               >
-                View Cart
-              </Button>
-            </Link>
+                <Button
+                  variant="outline"
+                  className="w-full border-rose-500 hover:bg-rose-600 hover:text-gray-100 cursor-pointer text-rose-400 rounded-sm"
+                  size="lg"
+                >
+                  View Cart
+                </Button>
+              </Link>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

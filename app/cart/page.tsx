@@ -39,7 +39,7 @@ function Cart() {
   };
 
   return (
-    <div className="flex justify-center min-h-screen bg-gray-100 w-2/3 mx-auto my-8 relative">
+    <div className="flex justify-center min-h-screen  mt-35  bg-gray-100 w-2/3 mx-auto my-8 relative">
       <div className="basis-[100%]">
         {/* Stepper */}
         <div className="container horizontal mt-5">

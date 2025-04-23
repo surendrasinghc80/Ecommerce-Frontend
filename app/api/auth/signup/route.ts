@@ -74,7 +74,20 @@ export async function POST(
       from: `Bonik Team <${process.env.EMAIL_FROM}>`,
       to: email,
       subject: "Welcome to Bonik",
-      html: `<h1>Welcome to Bonik, ${fullName}!</h1><p>Thank you for signing up. We are excited to have you on board.</p>`,
+      html: `
+      <div style="font-family: 'Helvetica Neue', sans-serif; padding: 20px; background-color: #f9f9f9;">
+        <h1 style="color: #ff6600;">Hey ${fullName}, welcome to Bonik!</h1>
+          <p>We're excited to have you shopping with us. Use your exclusive welcome coupon below:</p>
+          <h2 style="background-color: #fff3cd; padding: 10px; border-radius: 5px; display: inline-block;">
+          WELCOME10
+          </h2>
+          <p>Click the button below to start shopping:</p>
+            <a href="http://localhost:3000" style="background-color: #ff6600; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+            Shop Now
+            </a>
+          <p style="margin-top: 30px;">Happy shopping!<br>— The Bonik Team</p>
+      </div>
+        `,
       headers: {
         "X-Mailer": "Bonik Mailer",
       },

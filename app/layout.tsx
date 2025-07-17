@@ -34,9 +34,12 @@ export default function RootLayout({
           </div>
 
           {/* Main Content */}
-          <main className="pt-20 px-2 sm:px-0 lg:px-8 min-h-screen">
-            {children}
+          <main className="pt-20 px-2 sm:px-0 lg:px-8 min-h-screen flex justify-center items-center">
+            <div className="w-full">
+              {children}
+            </div>
           </main>
+
 
           {/* Toasts */}
           <ToastContainer position="top-right" autoClose={3000} />

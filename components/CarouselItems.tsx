@@ -121,8 +121,8 @@ function CarouselItems() {
     }).format(price)
 
   const ProductCard = ({ product }: { product: Product }) => (
-    <div className="bg-white p-6 rounded-md shadow-sm flex flex-col items-center border hover:border-gray-500 transition duration-300">
-      <div className="w-full h-90 relative group mb-4 cursor-pointer">
+    <div className="bg-white rounded-md shadow-sm flex flex-col p-2 items-center border hover:border-gray-500 transition duration-300">
+      <div className="w-full h-50 relative group mb-4 cursor-pointer">
         <Link href={`/product/${product.id}`}>
           <FallbackImage
             src={product.images?.[0]?.imageUrl || "/placeholder.svg"}
@@ -140,21 +140,23 @@ function CarouselItems() {
       </div>
       <h3 className="text-gray-700 text-center mb-2">{product.name}</h3>
       <p className="font-medium text-gray-900 mb-2">{formatPrice(product.basePrice)}</p>
-      {cart.find((item: { id: string | number }) => item.id === product.id) ? (
-        <div className="flex items-center justify-around gap-2 w-full">
-          <button onClick={() => handleDecrement(product.id)} className="p-1 border rounded-md hover:bg-gray-100">
-            <Minus className="h-3 w-3" />
-          </button>
-          <span className="w-6 text-center">
-            {cart.find((item: { id: string | number }) => item.id === product.id)?.quantity}
-          </span>
-          <button onClick={() => handleIncrement(product.id)} className="p-1 border rounded-md hover:bg-gray-100">
-            <Plus className="h-3 w-3" />
-          </button>
-        </div>
-      ) : (
-        <AddToCartButton product={product} />
-      )}
+      <div className="items-end mt-auto" >
+        {cart.find((item: { id: string | number }) => item.id === product.id) ? (
+          <div className="flex items-center justify-around gap-2 w-full">
+            <button onClick={() => handleDecrement(product.id)} className="p-1 border rounded-md hover:bg-gray-100">
+              <Minus className="h-3 w-3" />
+            </button>
+            <span className="w-6 text-center">
+              {cart.find((item: { id: string | number }) => item.id === product.id)?.quantity}
+            </span>
+            <button onClick={() => handleIncrement(product.id)} className="p-1 border rounded-md hover:bg-gray-100">
+              <Plus className="h-3 w-3" />
+            </button>
+          </div>
+        ) : (
+          <AddToCartButton product={product} />
+        )}
+      </div>
     </div>
   )
 
@@ -163,7 +165,7 @@ function CarouselItems() {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-8 relative">
+    <div className="w-full mx-auto py-8 relative">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-medium text-gray-800">Deals Of The Day</h2>
         <Link href="/" className="text-sm text-black hover:text-pink-500">
@@ -193,7 +195,7 @@ function CarouselItems() {
 
       {/* Mobile view: Show all products in 2-column grid */}
       <div className="block md:hidden">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-2">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

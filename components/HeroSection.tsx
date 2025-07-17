@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 
 function HeroSection() {
   return (
-    <div className="flex flex-col lg:flex-row justify-center w-full max-w-7xl mx-auto px-4 py-8 gap-6">
+    <div className=" contain flex flex-col lg:flex-row justify-center items-center w-full mx-auto gap-6">
       {/* Left Main Hero */}
       <div className="w-full lg:w-2/3 relative cursor-pointer flex justify-center">
         <Image
@@ -16,30 +16,28 @@ function HeroSection() {
           alt="Hero Banner"
           className="w-full h-auto max-h-[530px] object-cover rounded-sm"
           width={1030}
-          height={530}
+          height={600}
         />
-        <div className="absolute top-1/2 left-6 transform -translate-y-1/2 text-start space-y-2 max-w-[80%]">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-normal text-zinc-900">
-            Lifestyle Collections
-          </h2>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-900">
-            Men
-          </h1>
-          <div className="flex items-center mt-2">
-            <h1 className="text-xl sm:text-2xl font-semibold text-zinc-900">
-              SALE UP TO
+        <div className="absolute top-1/2 left-6 transform -translate-y-1/2 text-start text-gray-200 space-y-2 max-w-[80%]">
+          <div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-normal ">
+              Lifestyle Collections
+            </h2>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold ">
+              Men
             </h1>
-            <span className="text-red-400 ml-3 text-md font-semibold">
-              30% OFF
-            </span>
+            <div className="flex items-center mt-2">
+              <h1 className="text-xl sm:text-2xl font-semibold ">
+                SALE UP TO
+              </h1>
+              <span className="text-red-400 ml-3 text-md font-semibold">
+                30% OFF
+              </span>
+            </div>
+            <p className="text-md font-normal ">
+              Get Free Shipping on orders over $99.00
+            </p>
           </div>
-          <p className="text-md font-normal text-zinc-900">
-            Get Free Shipping on orders over $99.00
-          </p>
-
-          <Button className="mt-5 bg-red-400 hover:bg-red-500 text-white font-normal text-md py-2 px-4 rounded cursor-pointer transition duration-400">
-            Shop Now
-          </Button>
         </div>
       </div>
 

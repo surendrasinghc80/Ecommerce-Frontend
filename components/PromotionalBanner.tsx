@@ -11,23 +11,19 @@ function PromotionalBanner() {
     const textElement = textRef.current;
     if (!textElement) return;
 
-    // Set up the animation
     textElement.style.transform = "translateX(100%)";
 
-    const animate = () => {
-      const animation = textElement.animate(
-        [{ transform: "translateX(100%)" }, { transform: "translateX(-100%)" }],
-        {
-          duration: 15000,
-          iterations: Number.POSITIVE_INFINITY,
-          easing: "linear",
-        }
-      );
-
-      return animation;
-    };
-
-    const animation = animate();
+    const animation = textElement.animate(
+      [
+        { transform: "translateX(100%)" },
+        { transform: "translateX(-100%)" },
+      ],
+      {
+        duration: 15000,
+        iterations: Infinity,
+        easing: "linear",
+      }
+    );
 
     return () => {
       animation.cancel();
@@ -35,29 +31,31 @@ function PromotionalBanner() {
   }, []);
 
   return (
-    <div className="w-2/3 mx-auto bg-gray-100 mb-8 mt-5">
-      <div className="w-full max-w-screen-xl mx-auto">
-        <div className="flex flex-col sm:flex-row items-center ">
+    <div className="w-full sm:px-6 lg:px-8 bg-gray-100 mb-8 mt-5">
+      <div className="max-w-screen-xl mx-auto rounded-md overflow-hidden">
+        <div className="flex flex-col sm:flex-row items-center shadow-md">
           {/* Left section */}
-          <div className="bg-gray-200 py-4.5 px-6 pr-3 w-full sm:w-1/3 text-center sm:text-left">
-            <h2 className="text-2xl font-bold">BLACK FRIDAY SALE!</h2>
+          <div className="bg-gray-200 py-4 px-4 w-full sm:w-1/3 text-center sm:text-left">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold">
+              BLACK FRIDAY SALE!
+            </h2>
           </div>
 
-          {/* Middle section with moving text */}
-          <div className="bg-zinc-700 py-4 px-6 w-full sm:flex-1 overflow-hidden">
+          {/* Moving text section */}
+          <div className="bg-zinc-700 py-4 px-4 w-full sm:flex-1 overflow-hidden">
             <div
               ref={textRef}
-              className="whitespace-nowrap text-white text-3xl"
+              className="whitespace-nowrap text-white text-base sm:text-xl md:text-2xl"
             >
               PAY ONLY FOR YOUR LOVING ELECTRONICS
             </div>
           </div>
 
-          {/* Right section */}
-          <div className="bg-zinc-700 py-4 px-6 w-full sm:w-1/6 flex justify-center">
+          {/* Button section */}
+          <div className="bg-zinc-700 py-4 px-4 w-full sm:w-1/6 flex justify-center">
             <Button
               asChild
-              className="bg-white text-black hover:bg-gray-100 cursor-pointer transition duration-400"
+              className="bg-white text-black text-sm sm:text-base hover:bg-gray-200 transition duration-300"
             >
               <Link href="/sale">Shop Now</Link>
             </Button>

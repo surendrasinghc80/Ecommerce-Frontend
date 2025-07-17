@@ -113,8 +113,8 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex w-full justify-center bg-white shadow-lg sticky top-0 z-50">
-      <div className="w-full max-w-screen-xl px-4 md:px-6">
+    <header className="flex w-full px-2 justify-center mx-auto bg-white shadow-lg sticky top-0 z-50">
+      <div className="w-full">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row items-center justify-between py-3 md:py-4 gap-3 md:gap-0">
           {/* Mobile Menu Button and Logo */}

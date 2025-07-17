@@ -39,26 +39,29 @@ function Banner() {
   ];
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 p-4 sm:p-8 max-w-7xl mx-auto">
+    <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center items-center gap-6 p-4 sm:p-8 w-full mx-auto">
       {products.map((product) => (
-        <div key={product.id} className="relative w-full sm:w-[300px] md:w-[350px] lg:w-[400px]">
+        <div
+          key={product.id}
+          className="relative w-full sm:w-[48%] md:w-[30%] lg:w-[30%] xl:w-[30%] overflow-hidden rounded shadow"
+        >
           <Image
             src={product.imageSrc || "/placeholder.svg"}
             alt={product.name}
             width={400}
             height={400}
-            className="w-full h-auto object-cover rounded"
+            className="w-full h-auto object-cover"
           />
-          <div className="absolute top-5 left-5 sm:left-6 text-left">
-            <div className={product.id === 2 ? "text-gray-100" : "text-zinc-900"}>
-              <p className="text-xs sm:text-sm font-normal">{product.heading}</p>
-              <h1 className="text-xl sm:text-2xl font-semibold pt-2">
+          <div className="absolute top-2 left-5 sm:left-6 text-left">
+            <div className={product.id === 2 ? "text-white" : "text-zinc-900 mb-2 "}>
+              <p className="text-sm sm:text-base font-normal">{product.heading}</p>
+              <h1 className="text-lg sm:text-xl md:text-2xl font-semibold pt-1">
                 {product.subHeading}
               </h1>
               <p className="text-sm sm:text-base">{product.sale}</p>
               <Button
                 variant="ghost"
-                className="mt-3 px-2 py-1 text-sm sm:text-md font-medium"
+                className="mt-3 px-3 py-1 text-sm sm:text-base font-medium"
               >
                 Shop Now
               </Button>

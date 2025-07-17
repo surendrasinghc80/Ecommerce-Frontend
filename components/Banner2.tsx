@@ -30,34 +30,27 @@ function Banner2() {
   ];
 
   return (
-    <div className="flex flex-row p-8 mx-auto">
+    <div className="flex flex-col md:flex-row flex-wrap gap-6 py-8 mx-auto w-full">
       {products.map((product) => (
-        <div className="m-5 relative " key={product.id}>
+        <div
+          className="relative flex-1 min-w-[300px] max-w-full"
+          key={product.id}
+        >
           <Image
             src={product.imageSrc || "/placeholder.svg"}
             alt={product.name}
-            width={620} // Adjust as needed
-            height={620} // Adjust as needed
-            className="object-contain"
+            width={620}
+            height={620}
+            className="w-full h-auto object-contain rounded-lg"
           />
-          <div className="absolute top-5 left-5">
-            {product.id === 2 ? (
-              <div className="text-gray-100">
-                <p className="font-normal text-sm">{product.heading}</p>
-                <h1 className=" font-semibold text-3xl pt-3">
-                  {product.subHeading}
-                </h1>
-                <p>{product.sale}</p>
-              </div>
-            ) : (
-              <div className="text-zinc-900">
-                <p className="font-normal text-sm">{product.heading}</p>
-                <h1 className="font-semibold text-3xl pt-3 ">
-                  {product.subHeading}
-                </h1>
-                <p>{product.sale}</p>
-              </div>
-            )}
+          <div className="absolute top-2 left-5">
+            <div className={product.id === 2 ? "text-white" : "text-zinc-900"}>
+              <p className="text-sm font-normal">{product.heading}</p>
+              <h1 className="text-2xl sm:text-3xl font-semibold pt-2">
+                {product.subHeading}
+              </h1>
+              <p className="text-sm pt-1">{product.sale}</p>
+            </div>
           </div>
         </div>
       ))}

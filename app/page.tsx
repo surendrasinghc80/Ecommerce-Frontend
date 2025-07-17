@@ -12,8 +12,8 @@ import Gifts from "@/components/Gifts";
 
 export default function Home() {
   return (
-    <div className="flex bg-gray-100 w-full mx-auto flex-col">
-      <div className="pt-10 mt-25">
+    <div className="flex w-full mx-auto flex-col">
+      <div className="pt-10">
         <HeroSection />
       </div>
       <Featured />
@@ -24,7 +24,6 @@ export default function Home() {
       <CarouselItems />
       <Banner2 />
       <CategoryAndItems />
-      <Gifts />
     </div>
   );
 }

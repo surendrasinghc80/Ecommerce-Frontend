@@ -3,7 +3,7 @@ import { Truck, Award, Clock, CreditCard } from "lucide-react";
 export default function ServiceFeatures() {
   return (
     <div className="container max-w-7xl mx-auto bg-white py-10 px-4 mb-8 mt-5">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Fast Delivery */}
         <div className="flex flex-col sm:flex-row items-center text-center sm:text-left justify-center gap-4">
           <Truck className="w-10 h-10 text-gray-700" />

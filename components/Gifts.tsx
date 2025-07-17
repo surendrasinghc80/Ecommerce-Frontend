@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 interface Product {
@@ -24,36 +26,36 @@ function Gifts() {
   ];
 
   return (
-    <div className="flex flex-row p-8 mx-auto">
-      {products.map((product) => (
-        <div className="m-5 relative " key={product.id}>
-          <Image
-            src={product.imageSrc || "/placeholder.svg"}
-            alt={product.name}
-            width={1280}
-            height={1000}
-            className="object-contain"
-          />
-          <div className="absolute flex flex-col align-middle justify-center inset-0 text-center">
-            <div className="justify-center flex">
-              <p className="font-bold text-zinc-800 justify-center text-4xl">
-                {product.heading}
-              </p>
-              <span className="text-pink-500 text-bold text-4xl ml-2 mr-2">
-                {product.off}
-              </span>
-              <span className="font-bold text-zinc-800 justify-center text-4xl">
-                {product.last}
-              </span>
-            </div>
-            <div>
-              <h1 className="font-normal text-zinc-800 text-lg ">
+    <div className="w-full py-8 flex justify-center">
+      <div className="w-full max-w-7xl flex flex-col md:flex-row flex-wrap justify-center items-center gap-6">
+        {products.map((product) => (
+          <div className="relative w-full md:w-[90%] lg:w-[80%]" key={product.id}>
+            <Image
+              src={product.imageSrc || "/placeholder.svg"}
+              alt={product.name}
+              fill
+              className="w-full h-full object-cover rounded-lg"
+              priority
+            />
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
+              <div className="flex flex-wrap justify-center items-center mb-2">
+                <p className="font-bold text-zinc-800 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                  {product.heading}
+                </p>
+                <span className="text-pink-500 font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl mx-2">
+                  {product.off}
+                </span>
+                <span className="font-bold text-zinc-800 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                  {product.last}
+                </span>
+              </div>
+              <h1 className="text-zinc-800 text-sm sm:text-base md:text-lg font-normal max-w-xl">
                 {product.subHeading}
               </h1>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

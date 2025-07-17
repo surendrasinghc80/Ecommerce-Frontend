@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import { Poppins } from "next/font/google";
@@ -7,20 +6,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // Choose what you need
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -36,19 +25,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${poppins.variable} antialiased bg-gray-100 text-gray-900`}
+        className={`${poppins.variable} antialiased bg-gray-100 text-gray-900`}
       >
         <Providers>
-          <div className="fixed top-0 w-full shadow-md z-50">
+          {/* Fixed Header */}
+          <div className="fixed top-0 w-full z-50 shadow-md bg-white">
             <Header />
           </div>
-          {children}
+
+          {/* Main Content */}
+          <main className="pt-20 px-2 sm:px-0 lg:px-8 min-h-screen">
+            {children}
+          </main>
+
+          {/* Toasts */}
           <ToastContainer position="top-right" autoClose={3000} />
+
+          {/* Footer */}
           <Footer />
         </Providers>
       </body>
     </html>
   );
 }
-
-//${geistSans.variable} ${geistMono.variable}

@@ -17,7 +17,7 @@ function Banner() {
       name: "Silver High Neck Sweater",
       imageSrc: "/images/banner-18.jpg",
       heading: "NEW ARRIVALS",
-      subHeading: "SKI ClOTHES SALE",
+      subHeading: "SKI CLOTHES SALE",
       sale: "Up to 35% Off",
     },
     {
@@ -39,40 +39,30 @@ function Banner() {
   ];
 
   return (
-    <div className="flex flex-row p-8 mx-auto">
+    <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 p-4 sm:p-8 max-w-7xl mx-auto">
       {products.map((product) => (
-        <div className="m-5 relative " key={product.id}>
+        <div key={product.id} className="relative w-full sm:w-[300px] md:w-[350px] lg:w-[400px]">
           <Image
             src={product.imageSrc || "/placeholder.svg"}
             alt={product.name}
-            width={400} // Adjust as needed
-            height={400} // Adjust as needed
-            className="object-contain"
+            width={400}
+            height={400}
+            className="w-full h-auto object-cover rounded"
           />
-          <div className="absolute top-5 left-5">
-            {product.id === 2 ? (
-              <div className="text-gray-100">
-                <p className="font-normal text-sm">{product.heading}</p>
-                <h1 className=" font-normal text-2xl pt-3">
-                  {product.subHeading}
-                </h1>
-                <p>{product.sale}</p>
-                <Button className="w-18 " variant="ghost">
-                  Shop Now
-                </Button>
-              </div>
-            ) : (
-              <div className="text-zinc-900">
-                <p className="font-normal text-sm">{product.heading}</p>
-                <h1 className="font-normal text-2xl pt-3 ">
-                  {product.subHeading}
-                </h1>
-                <p>{product.sale}</p>
-                <Button className="-left-0 w-18 text-thin" variant="ghost">
-                  Shop Now
-                </Button>
-              </div>
-            )}
+          <div className="absolute top-5 left-5 sm:left-6 text-left">
+            <div className={product.id === 2 ? "text-gray-100" : "text-zinc-900"}>
+              <p className="text-xs sm:text-sm font-normal">{product.heading}</p>
+              <h1 className="text-xl sm:text-2xl font-semibold pt-2">
+                {product.subHeading}
+              </h1>
+              <p className="text-sm sm:text-base">{product.sale}</p>
+              <Button
+                variant="ghost"
+                className="mt-3 px-2 py-1 text-sm sm:text-md font-medium"
+              >
+                Shop Now
+              </Button>
+            </div>
           </div>
         </div>
       ))}

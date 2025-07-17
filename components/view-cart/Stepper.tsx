@@ -59,34 +59,34 @@ function Stepper({
   }, [steps, currentStep]);
 
   return (
-    <div className="flex-row mx-4 pl-10 p-4 flex justify-between items-center">
-      <div className=" flex basis-[70%]">
+    <div className="mx-auto p-4 flex justify-between items-center">
+      <div className="flex items-center w-full space-x-2">
         {newStep.map((step, index) => (
-          <div key={index} className="w-full flex items-center">
-            <div>
-              <div className="relative flex items-center justify-between mb-4">
-                <Badge
-                  className={`p-2 rounded-4xl cursor-default  ${
-                    step.completed
-                      ? "bg-rose-500 text-gray-100 text-md"
-                      : "bg-gray-300 text-gray-500 text-md"
+          <React.Fragment key={index}>
+            <div className="flex items-center">
+              <Badge
+                variant="outline"
+                className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${step.completed
+                  ? "bg-rose-500 text-white border-rose-500"
+                  : "bg-gray-100 text-gray-600 border-gray-300"
+                  } ${step.highlighted ? "ring-2 ring-offset-2 ring-rose-300" : ""
                   }`}
-                >
-                  {index + 1}. {step.description}
-                </Badge>
-              </div>
+              >
+                {index + 1}. {step.description}
+              </Badge>
             </div>
+
             {index !== newStep.length - 1 && (
-              <div
-                className={`flex-auto border-t-4 mb-4 transition duration-500 ease-in-out border-gray-300 ${
-                  step.completed ? "border-rose-500" : "border-rose-300"
-                }`}
-              />
+              <div className="flex-1 flex items-center">
+                <div
+                  className={`h-0.5 flex-1 mx-2 ${step.completed ? "bg-rose-500" : "bg-gray-200"
+                    }`}
+                />
+              </div>
             )}
-          </div>
+          </React.Fragment>
         ))}
       </div>
-      <div className=" flex basis-[30%]"></div>
     </div>
   );
 }

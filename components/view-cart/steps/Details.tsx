@@ -7,118 +7,110 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  // SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
+
 function Details() {
   const { total } = useCart();
+
   return (
-    <div className="flex flex-row justify-between p-4">
-      <div className="basis-[70%] bg-white shadow-md mr-5 rounded-md p-5">
-        <div>
-          <p className="font-semibold">Shipping Address</p>
-          <div className="grid grid-cols-2 gap-4 mt-4 text-gray-500">
-            <div>
-              <Label className="text-sm font-semibold">Full Name</Label>
-              <Input className="p-2 text-lg rounded-sm" />
-            </div>
-            <div>
-              <Label className="text-sm font-semibold">Email Address</Label>
-              <Input className="p-2 text-lg rounded-sm" />
-            </div>
-            <div>
-              <Label className="text-sm font-semibold">Phone Number</Label>
-              <Input className="p-2 text-lg rounded-sm" />
-            </div>
-            <div>
-              <Label className="text-sm font-semibold">Company</Label>
-              <Input className="p-2 text-lg rounded-sm" />
-            </div>
-            <div>
-              <Label className="text-sm font-semibold">Zip Code</Label>
-              <Input className="p-2 text-lg rounded-sm" />
-            </div>
-            <div>
-              <Label className="text-sm font-semibold">Country</Label>
-              <Select>
-                <SelectTrigger className="w-[360px] cursor-pointer ">
-                  <SelectValue placeholder="Select Country" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {/* <SelectLabel>Categories</SelectLabel> */}
-                    <SelectItem className="cursor-pointer" value="fashion">
-                      Fashion
-                    </SelectItem>
-                    <SelectItem className="cursor-pointer" value="bike">
-                      Bike
-                    </SelectItem>
-                    <SelectItem className="cursor-pointer" value="gift">
-                      Gifts
-                    </SelectItem>
-                    <SelectItem className="cursor-pointer" value="music">
-                      Music
-                    </SelectItem>
-                    <SelectItem className="cursor-pointer" value="pet">
-                      Pet
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox id="terms" />
-              <label
-                htmlFor="terms"
-                className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Billing Address same as above.
-              </label>
-            </div>
-            <div>
-              <Button
-                variant={"outline"}
-                className="w-full border-rose-400 hover:bg-rose-500 hover:text-gray-100 text-rose-400 rounded-sm cursor-pointer transition duration-400"
-              >
-                Save Address
-              </Button>
-            </div>
+    <div className="flex flex-col md:flex-row justify-between gap-4 p-4">
+      {/* Left: Shipping Address */}
+      <div className="w-full md:w-[70%] bg-white shadow-md rounded-md p-5">
+        <p className="font-semibold text-lg">Shipping Address</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-gray-500">
+          <div>
+            <Label className="text-sm font-semibold">Full Name</Label>
+            <Input className="p-2 text-base rounded-sm w-full" />
+          </div>
+          <div>
+            <Label className="text-sm font-semibold">Email Address</Label>
+            <Input className="p-2 text-base rounded-sm w-full" />
+          </div>
+          <div>
+            <Label className="text-sm font-semibold">Phone Number</Label>
+            <Input className="p-2 text-base rounded-sm w-full" />
+          </div>
+          <div>
+            <Label className="text-sm font-semibold">Company</Label>
+            <Input className="p-2 text-base rounded-sm w-full" />
+          </div>
+          <div>
+            <Label className="text-sm font-semibold">Zip Code</Label>
+            <Input className="p-2 text-base rounded-sm w-full" />
+          </div>
+          <div>
+            <Label className="text-sm font-semibold">Country</Label>
+            <Select>
+              <SelectTrigger className="w-full cursor-pointer">
+                <SelectValue placeholder="Select Country" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="fashion">Fashion</SelectItem>
+                  <SelectItem value="bike">Bike</SelectItem>
+                  <SelectItem value="gift">Gifts</SelectItem>
+                  <SelectItem value="music">Music</SelectItem>
+                  <SelectItem value="pet">Pet</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex items-center space-x-2 col-span-1 md:col-span-2">
+            <Checkbox id="terms" />
+            <label
+              htmlFor="terms"
+              className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Billing Address same as above.
+            </label>
+          </div>
+          <div className="col-span-1 md:col-span-2">
+            <Button
+              variant={"outline"}
+              className="w-full border-rose-400 hover:bg-rose-500 hover:text-white text-rose-400 rounded-sm transition"
+            >
+              Save Address
+            </Button>
           </div>
         </div>
       </div>
-      <div className="basis-[30%] bg-white shadow-md rounded-md p-5">
-        <div className="border-b">
-          <p className="font-semibold">Order Summary</p>
-          <div className="flex flex-col mt-4">
-            <div className="flex justify-between text-gray-600 items-center mb-2">
-              <p className="text-sm font-semibold">Subtotal</p>
-              <p className="text-sm font-semibold">₹{total}</p>
+
+      {/* Right: Order Summary */}
+      <div className="w-full md:w-[30%] bg-white shadow-md rounded-md p-5">
+        <div className="border-b pb-4">
+          <p className="font-semibold text-lg">Order Summary</p>
+          <div className="flex flex-col mt-4 text-gray-600">
+            <div className="flex justify-between mb-2 text-sm font-semibold">
+              <p>Subtotal</p>
+              <p>₹{total}</p>
             </div>
-            <div className="flex justify-between text-gray-600 items-center mb-2">
-              <p className="text-sm font-semibold">Shipping</p>
-              <p className="text-sm font-semibold">-</p>
+            <div className="flex justify-between mb-2 text-sm font-semibold">
+              <p>Shipping</p>
+              <p>-</p>
             </div>
-            <div className="flex justify-between  text-gray-600 items-center mb-2">
-              <p className="text-sm font-semibold">Tax</p>
-              <p className="text-sm font-semibold">₹150.00</p>
+            <div className="flex justify-between mb-2 text-sm font-semibold">
+              <p>Tax</p>
+              <p>₹150.00</p>
             </div>
-            <div className="flex justify-between  text-gray-600 items-center mb-2">
-              <p className="text-sm font-semibold">Discount</p>
-              <p className="text-sm font-semibold">-</p>
+            <div className="flex justify-between mb-2 text-sm font-semibold">
+              <p>Discount</p>
+              <p>-</p>
             </div>
           </div>
         </div>
-        <div className="mt-2 pt-4">
-          <div>
-            <Input className="p-2 text-lg rounded-sm" placeholder="Voucher" />
-          </div>
-          <div className="pt-4 pb-8">
+        <div className="pt-4">
+          <Input
+            className="p-2 text-base rounded-sm w-full"
+            placeholder="Voucher"
+          />
+          <div className="pt-4">
             <Button
               variant={"outline"}
-              className="w-full border-rose-400 hover:bg-rose-500 hover:text-gray-100 text-rose-400 rounded-sm cursor-pointer transition duration-400"
+              className="w-full border-rose-400 hover:bg-rose-500 hover:text-white text-rose-400 rounded-sm transition"
             >
               Apply Voucher
             </Button>

@@ -15,31 +15,31 @@ import { Camera } from "lucide-react";
 
 export function ProfileInfo() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <Card>
         <CardHeader>
           <CardTitle>Personal Information</CardTitle>
           <CardDescription>Update your personal details here.</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+        <CardContent className="space-y-4 md:space-y-6">
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 items-start sm:items-center">
             <div className="relative">
-              <Avatar className="h-20 w-20">
+              <Avatar className="h-16 w-16 md:h-20 md:w-20">
                 <AvatarImage src="/placeholder.svg" alt="Profile picture" />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
               <Button
                 size="icon"
                 variant="outline"
-                className="absolute bottom-0 right-0 h-6 w-6 rounded-full border-2 border-white cursor-pointer transition duration-400"
+                className="absolute bottom-0 right-0 h-5 w-5 md:h-6 md:w-6 rounded-full border-2 border-white cursor-pointer transition duration-400"
               >
-                <Camera className="h-3 w-3" />
+                <Camera className="h-3 w-3 md:h-4 md:w-4" />
                 <span className="sr-only">Upload new picture</span>
               </Button>
             </div>
             <div>
               <h3 className="font-medium">Profile Picture</h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-xs md:text-sm text-gray-500">
                 JPG, GIF or PNG. 1MB max size.
               </p>
             </div>
@@ -72,7 +72,7 @@ export function ProfileInfo() {
             <Input id="phone" type="tel" defaultValue="+1 (555) 123-4567" />
           </div>
         </CardContent>
-        <CardFooter className="border-t p-6 flex justify-end">
+        <CardFooter className="border-t p-4 md:p-6 flex justify-end">
           <Button>Save Changes</Button>
         </CardFooter>
       </Card>
@@ -96,7 +96,7 @@ export function ProfileInfo() {
             <Input id="confirmPassword" type="password" />
           </div>
         </CardContent>
-        <CardFooter className="border-t p-6 flex justify-end">
+        <CardFooter className="border-t p-4 md:p-6 flex justify-end">
           <Button>Update Password</Button>
         </CardFooter>
       </Card>

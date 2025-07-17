@@ -1,7 +1,6 @@
 import React from "react";
 import { X, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import FallbackImage from "@/components/FallbackImage";
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -44,22 +44,22 @@ function CartView() {
     }).format(price);
 
   return (
-    <div className="flex flex-row h-full w-full basis-[70%]">
-      <div className="flex-1 overflow-y-auto py-2">
+    <div className="flex flex-col lg:flex-row h-full w-full gap-4">
+      {/* Cart Items */}
+      <div className="w-full lg:w-2/3 overflow-y-auto py-2">
         {cart.map((product: CartItem) => (
           <div
             key={product.id}
-            className="p-4 bg-white rounded-md mb-5 border-1 shadow-md"
+            className="p-4 bg-white rounded-md mb-5 border shadow-sm"
           >
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               {/* Product Image */}
-              <div className="relative h-30 w-30 flex-shrink-0">
-                <Image
+              <div className="relative h-32 w-full sm:w-32 flex-shrink-0">
+                <FallbackImage
                   src={product.imageUrl || "/placeholder.svg"}
                   alt={product.name}
-                  height={80}
-                  width={80}
-                  className="object-cover rounded-md"
+                  fill
+                  className="object-contain"
                 />
               </div>
 
@@ -74,19 +74,13 @@ function CartView() {
                     <X className="h-4 w-4" />
                   </button>
                 </div>
-                <div className="flex flex-row ">
-                  <div className="flex pr-5">
-                    <p className="text-xs text-gray-500 mt-1 mr-2">size: </p>
-                    <p className="text-xs text-gray-500 mt-1">{product.size}</p>
-                  </div>
-                  <div className="flex">
-                    <p className="text-xs text-gray-500 mt-1 mr-2">color: </p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {product.color}
-                    </p>
-                  </div>
+
+                <div className="flex flex-wrap text-xs text-gray-500 mt-1 gap-4">
+                  <p>Size: {product.size}</p>
+                  <p>Color: {product.color}</p>
                 </div>
-                <div className="flex justify-between items-center mt-2">
+
+                <div className="flex justify-between items-center mt-3 flex-wrap gap-2">
                   <p className="font-medium text-rose-500">
                     {formatPrice(product.basePrice)}
                   </p>
@@ -95,14 +89,14 @@ function CartView() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => decrementQuantity(product)}
-                      className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
+                      className="p-1 border rounded hover:bg-gray-100"
                     >
                       <Minus className="h-3 w-3" />
                     </button>
                     <span className="w-6 text-center">{product.quantity}</span>
                     <button
                       onClick={() => incrementQuantity(product)}
-                      className="p-1 border rounded-md hover:bg-gray-100 cursor-pointer"
+                      className="p-1 border rounded hover:bg-gray-100"
                     >
                       <Plus className="h-3 w-3" />
                     </button>
@@ -113,96 +107,78 @@ function CartView() {
           </div>
         ))}
       </div>
-      <div className="basis-[30%] bg-white p-4 ml-5 mt-2 border-1 rounded-md shadow-md">
-        <div className="flex justify-between pb-4 border-b ">
+
+      {/* Summary / Sidebar */}
+      <div className="w-full lg:w-1/3 bg-white p-4 border rounded-md shadow-sm">
+        <div className="flex justify-between pb-4 border-b">
           <p className="text-gray-500">Total:</p>
           <p className="font-semibold text-lg text-gray-700">
-            {" "}
             {formatPrice(total)}
           </p>
         </div>
-        <div className="border-b">
-          <div className="flex pt-4 items-center">
+
+        {/* Additional Comments */}
+        <div className="border-b mt-4">
+          <div className="flex items-center">
             <p className="font-semibold">Additional Comments</p>
-            <Badge className="bg-rose-300 text-gray-100 rounded-sm ml-2">
-              Note
-            </Badge>
+            <Badge className="bg-rose-300 text-white ml-2">Note</Badge>
           </div>
-          <div className="mt-2 pt-4">
+          <div className="mt-4">
             <Textarea placeholder="Type your message here." />
-            <div className="pt-4">
-              <Input className="p-2 text-lg" placeholder="Voucher" />
-            </div>
-            <div className="pt-4 pb-8">
-              <Button
-                variant={"outline"}
-                className="w-full border-rose-400 hover:bg-rose-500 hover:text-gray-100 text-rose-400 rounded-sm cursor-pointer transition duration-400"
-              >
-                Apply Voucher
-              </Button>
-            </div>
+            <Input className="mt-4 p-2 text-base" placeholder="Voucher" />
+            <Button
+              variant="outline"
+              className="mt-4 w-full border-rose-400 text-rose-400 hover:bg-rose-500 hover:text-white"
+            >
+              Apply Voucher
+            </Button>
           </div>
         </div>
-        <div className="pt-5 pb-5">
-          <p className="font-semibold">Shipping Estimates</p>
-          <p className="font-normal pt-4 pb-2 pl-1">Country</p>
-          <div className="pb-4 w-full">
+
+        {/* Shipping Section */}
+        <div className="pt-5">
+          <p className="font-semibold mb-4">Shipping Estimates</p>
+
+          <div className="mb-4">
+            <p className="mb-1 text-sm">Country</p>
             <Select>
-              <SelectTrigger className="w-[340px] cursor-pointer ">
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select Country" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {/* <SelectLabel>Categories</SelectLabel> */}
-                  <SelectItem className="cursor-pointer" value="fashion">
-                    Fashion
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="bike">
-                    Bike
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="gift">
-                    Gifts
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="music">
-                    Music
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="pet">
-                    Pet
-                  </SelectItem>
+                  <SelectItem value="fashion">Fashion</SelectItem>
+                  <SelectItem value="bike">Bike</SelectItem>
+                  <SelectItem value="gift">Gifts</SelectItem>
+                  <SelectItem value="music">Music</SelectItem>
+                  <SelectItem value="pet">Pet</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
           </div>
-          <p className="font-normal pb-2 pl-1">State</p>
-          <div className="pb-4 w-full">
+
+          <div className="mb-4">
+            <p className="mb-1 text-sm">State</p>
             <Select>
-              <SelectTrigger className="w-[340px] cursor-pointer ">
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select State" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {/* <SelectLabel>Categories</SelectLabel> */}
-                  <SelectItem className="cursor-pointer" value="fashion">
-                    Fashion
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="bike">
-                    Bike
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="gift">
-                    Gifts
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="music">
-                    Music
-                  </SelectItem>
-                  <SelectItem className="cursor-pointer" value="pet">
-                    Pet
-                  </SelectItem>
+                  <SelectItem value="fashion">Fashion</SelectItem>
+                  <SelectItem value="bike">Bike</SelectItem>
+                  <SelectItem value="gift">Gifts</SelectItem>
+                  <SelectItem value="music">Music</SelectItem>
+                  <SelectItem value="pet">Pet</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
           </div>
-          <p className="font-normal pb-2 pl-1">Zip Code</p>
-          <Input className="p-2" placeholder="3100" />
+
+          <div>
+            <p className="mb-1 text-sm">Zip Code</p>
+            <Input placeholder="3100" className="p-2" />
+          </div>
         </div>
       </div>
     </div>

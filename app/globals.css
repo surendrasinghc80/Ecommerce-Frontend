@@ -121,27 +121,22 @@
 
 /* Smooth scrollbar */
 
-/* width */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 0px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #070c1a;
-  border-radius: 15px;
+  background: #f1f1f1;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #636363;
-  border-radius: 15px;
-
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  border-radius: 2px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #8d8d8d;
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
 }
 
 @layer base {

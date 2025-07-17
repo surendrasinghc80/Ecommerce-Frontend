@@ -39,13 +39,15 @@ function Cart() {
   };
 
   return (
-    <div className="flex justify-center min-h-screen  mt-35  bg-gray-100 w-2/3 mx-auto my-8 relative">
-      <div className="basis-[100%]">
+    <div className="flex flex-col justify-center min-h-screen bg-gray-100 px-4 py-8 sm:px-6 lg:px-8">
+      <div className="w-full max-w-screen-lg mx-auto">
         {/* Stepper */}
-        <div className="container horizontal mt-5">
+        <div className="mt-5">
           <Stepper steps={steps} currentStep={currentStep} />
         </div>
-        <div className="flex">
+
+        {/* Stepper Control */}
+        <div className="mt-6">
           <StepperControl
             steps={steps}
             handleClick={handleClick}
@@ -53,7 +55,8 @@ function Cart() {
           />
         </div>
 
-        <div>
+        {/* Step Content */}
+        <div className="mt-8">
           <StepperContext.Provider
             value={{ userData, setUserData, finalData, setFinalData }}
           >
@@ -61,7 +64,6 @@ function Cart() {
           </StepperContext.Provider>
         </div>
       </div>
-      {/* Optional Right Side */}
     </div>
   );
 }

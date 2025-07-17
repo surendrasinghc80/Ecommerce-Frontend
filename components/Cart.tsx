@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
+import FallbackImage from "./FallbackImage";
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -46,9 +47,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
       {/* Cart Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out w-full sm:w-96 md:w-[400px] lg:w-[25%] ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full bg-white z-50 shadow-xl transform transition-transform duration-300 ease-in-out w-full sm:w-96 md:w-[400px] lg:w-[25%] ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -74,12 +74,11 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 <div className="flex gap-4">
                   {/* Product Image */}
                   <div className="relative h-20 w-20 flex-shrink-0">
-                    <Image
-                      src={product.imageUrl || "/placeholder.svg"}
+                    <FallbackImage
+                      src={product.images?.[0]?.imageUrl || "/placeholder.svg"}
                       alt={product.name}
-                      height={60}
-                      width={60}
-                      className="object-cover"
+                      fill
+                      className="object-contain"
                     />
                   </div>
 

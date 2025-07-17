@@ -107,11 +107,10 @@ export default function ProductActions({
               key={color}
               variant={"outline"}
               onClick={() => handleColorChange(color)}
-              className={`border-gray-300 hover:bg-black hover:text-white ${
-                selectedColor === color
-                  ? "bg-white text-black border-black"
-                  : "bg-gray-100"
-              }`}
+              className={`border-gray-300 hover:bg-black hover:text-white ${selectedColor === color
+                ? "bg-white text-black border-black"
+                : "bg-gray-100"
+                }`}
             >
               {color}
             </Button>
@@ -127,11 +126,10 @@ export default function ProductActions({
               key={size}
               variant={"outline"}
               onClick={() => setSelectedSize(size)}
-              className={`border-gray-300 hover:bg-black hover:text-white ${
-                selectedSize === size
-                  ? "bg-white text-black border-black"
-                  : "bg-gray-100"
-              }`}
+              className={`border-gray-300 hover:bg-black hover:text-white ${selectedSize === size
+                ? "bg-white text-black border-black"
+                : "bg-gray-100"
+                }`}
             >
               {size}
             </Button>
